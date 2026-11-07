@@ -41,7 +41,7 @@ const SN=Object.fromEntries(SEC);
 /* لإضافة لعبة: أضف سطراً هنا. u = مجلد اللعبة (يجعل البطاقة مفعّلة)، k = مفتاح حفظ التقدم */
 const T=[
 {sec:'concrete',t:'اختبار الهبوط (Slump)',s:'ASTM C143/C143M – 26a',d:'املأ القالب بثلاث طبقات، ادمك، ارفع القالب وقِس الهبوط، ثم اكتب التقرير وواجه المهندس المشرف.',u:'slump/',k:'sta'},
-{sec:'concrete',t:'أخذ عينة الخرسانة الطازجة',s:'ASTM C172/C172M – 25',d:'عينة مركّبة من شاحنة الخلط في التوقيت الصحيح وبدون أخطاء تمثيل.'},
+{sec:'concrete',t:'أخذ عينة الخرسانة الطازجة',s:'ASTM C172/C172M – 25',d:'عينة مركّبة من شاحنة الخلط في التوقيت الصحيح وبدون أخطاء تمثيل.',u:'sampling/',k:'sta_c172'},
 {sec:'concrete',t:'درجة حرارة الخرسانة الطازجة',s:'ASTM C1064/C1064M – 23',d:'غمر الحساس وزمن القراءة وتقريب النتيجة والتحقق من الجهاز.'},
 {sec:'concrete',t:'الوزن الحجمي والمردود والهواء',s:'ASTM C138/C138M – 24a (AASHTO T 121)',d:'وزن الوعاء والدمك والتسوية ثم حساب المردود والهواء.'},
 {sec:'concrete',t:'محتوى الهواء بطريقة الضغط',s:'ASTM C231/C231M – 26',d:'مقياس الهواء من النوع A وB، ومعامل تصحيح الركام والمعايرة.'},
@@ -49,7 +49,7 @@ const T=[
 {sec:'concrete',t:'صب العينات ومعالجتها في الموقع',s:'ASTM C31/C31M – 26a',d:'اختيار القالب والدمك والمعالجة والنقل إلى المعمل.'},
 {sec:'concrete',t:'يوم الموقع: حملة متكاملة',s:'عدة مواصفات',d:'شاحنة خرسانة تصل: عينة ثم هبوط ثم حرارة ثم هواء ثم وزن ثم صب العينات.'}];
 let sec='all',P={};
-try{const r=JSON.parse(localStorage.getItem('sta'));if(r)P.sta=r}catch(e){}
+['sta','sta_c172'].forEach(k=>{try{const r=JSON.parse(localStorage.getItem(k));if(r)P[k]=r}catch(e){}});
 const $=s=>document.querySelector(s);
 $('#ch').innerHTML=SEC.map(x=>`<button data-s="${x[0]}" aria-pressed="${x[0]=='all'}">${x[1]}</button>`).join('');
 $('#nA').textContent=T.filter(x=>x.u).length;$('#nS').textContent=T.filter(x=>!x.u).length;
