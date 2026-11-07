@@ -1,0 +1,113 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>أخذ عينة الخرسانة الطازجة — ASTM C172/C172M-25</title>
+<style>
+:root{--bg:#e4e1da;--cd:#f7f5f0;--ink:#1d2630;--st:#2c5470;--am:#c98a1b;--ok:#2f8f5f;--er:#b8433a;--ln:#c9c4b8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 'Noto Kufi Arabic','Segoe UI',Tahoma,sans-serif}
+header{background:var(--st);color:#fff;padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+header h1{font-size:18px;margin:0}#h{font-size:14px}#pb{height:4px;background:#0003}#pr{height:4px;background:var(--am);transition:width .4s}
+nav{display:flex;gap:4px;overflow-x:auto;padding:8px;background:#d6d2c8}nav button{white-space:nowrap;font-size:13px;padding:5px 10px}nav .on{background:var(--st);color:#fff}
+main{max-width:980px;margin:14px auto;padding:0 12px}.card{background:var(--cd);border:1px solid var(--ln);border-radius:6px;padding:18px}
+button{font:inherit;border:1px solid var(--st);background:#fff;color:var(--st);border-radius:4px;padding:8px 14px;cursor:pointer;margin:3px}
+button:disabled{opacity:.45;cursor:default}button.pri{background:var(--st);color:#fff}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--am)}
+.op{display:block;width:100%;text-align:right}.ok{background:#d5eedf!important;border-color:var(--ok)!important;color:#145a37!important}.no{background:#f4d9d5!important;border-color:var(--er)!important;color:#7d2219!important}.sel{background:var(--st);color:#fff}
+.fb{padding:10px 14px;border-radius:4px;margin:10px 0;border-inline-start:5px solid}.g{background:#e3f3ea;border-color:var(--ok)}.b{background:#f8e4e1;border-color:var(--er)}.hint{color:#7a5300}
+.tg{background:var(--am);color:#fff;padding:1px 8px;border-radius:3px;font-size:12px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:700px){.g2{grid-template-columns:1fr}}
+.sv{width:100%;max-height:300px;background:#cfd6db;border-radius:4px}label{display:block;margin:6px 0;font-size:14px}input,select,textarea{font:inherit;width:100%;padding:6px;border:1px solid var(--ln);border-radius:4px}input[type=range]{padding:0}
+.ctl{background:#ecebe5;padding:8px;border-radius:4px;margin-bottom:8px}.nx{box-shadow:0 0 0 3px var(--am)}.eq{display:inline-block;margin:4px;padding:10px 12px}
+.sl path{transform-box:fill-box;transform-origin:50% 100%;animation:sk 1s ease-out}@keyframes sk{from{transform:scaleY(1.5)}}
+#pa{max-width:820px;margin:12px auto}.rep{background:#fff;border:2px solid var(--st);padding:20px}.rep td{border:1px solid var(--ln);padding:6px}.rep table{width:100%;border-collapse:collapse}
+@media(prefers-reduced-motion:reduce){.sl path{animation:none}}@media print{.pp header,.pp nav,.pp #pb,.pp main{display:none}}
+.trk{position:relative;height:22px;background:#d6d2c8;border-radius:4px;overflow:hidden;margin:10px 0}#bar{position:absolute;top:0;right:0;height:100%;width:0;background:#2c5470;opacity:.55}.z{position:absolute;top:0;height:100%;background:#b8433a40}.mk{position:absolute;top:0;width:4px;height:100%;background:#c98a1b}</style></head><body>
+<header><a href="../" style="color:#fff;text-decoration:none">← الرئيسية</a><h1>أخذ عينة الخرسانة الطازجة — ASTM C172/C172M – 25 <small style="font-weight:400;font-size:13px;opacity:.85">| تصميم: أحمد شاكر</small></h1><div id="h"></div><button onclick="if(confirm('مسح التقدم والبدء من جديد؟')){localStorage.removeItem('sta_c172');S=null;hud();start()}">إعادة من البداية</button></header><div id="pb"><div id="pr"></div></div><nav id="nv"></nav><main id="m"></main><div id="pa"></div>
+<script>
+const $=s=>document.querySelector(s),M=$('#m'),R=a=>a[Math.random()*a.length|0],sh=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
+let S;try{S=JSON.parse(localStorage.getItem('sta_c172'))}catch(e){}
+const sv=()=>{try{localStorage.setItem('sta_c172',JSON.stringify(S))}catch(e){}};
+let ac;function snd(f,d=.12){try{ac=ac||new AudioContext();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.value=.05;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
+const good=()=>snd(660),bad=()=>snd(170,.3);
+function hud(){$('#h').textContent=S?`${S.name} | ${{t:'تدريب',p:'تطبيق',c:'تحدٍّ'}[S.mode]} | المستوى ${(1+S.xp/100)|0} | الخبرة ${S.xp} | الأخطاء ${S.err}`:'';$('#pr').style.width=S?(S.st/ST.length*100)+'%':'0';$('#nv').innerHTML=S?ST.map((n,i)=>`<button class="${i==S.st?'on':''}" ${i>S.mx?'disabled':''} onclick="go(${i})">${n}</button>`).join(''):''}
+function go(i){S.st=i;S.mx=Math.max(S.mx,i);sv();hud();FN[i]()}
+const nxt=()=>go(S.st+1);
+let FL=[],MS=[];
+function quiz(L,done,i=0,r=0){if(i>=L.length){done(r);return}
+const [qq,oo,a,w,tp,c,h,s]=L[i],o=sh(oo.map((x,k)=>[x,k]));let f=0;
+M.innerHTML=`<div class=card><small>سؤال ${i+1}/${L.length} <span class=tg>${s||'ASTM'}</span></small><h3>${qq}</h3><div>${o.map((x,j)=>`<button class=op data-j=${j}>${x[0]}</button>`).join('')}</div><div id=f>${S.mode=='t'&&h?`<p class=hint>تلميح: ${h}</p>`:''}</div></div>`;
+const all=()=>M.querySelectorAll('.op');
+all().forEach(b=>b.onclick=()=>{const k=o[b.dataset.j][1],nx=`<button class=pri id=nx>التالي</button>`,bn=()=>{$('#nx').onclick=()=>quiz(L,done,i+1,r)};
+if(k==a){good();b.classList.add('ok');if(!f){r++;S.xp+=S.mode=='t'?6:10}all().forEach(x=>x.disabled=1);$('#f').innerHTML=`<div class="fb g"><b>✓ صحيح.</b> ${w}</div>${nx}`;hud();sv();bn()}
+else{bad();if(!f){f=1;S.err++;MS.push(tp);if(c)FL.push(tp)}b.classList.add('no');b.disabled=1;hud();
+if(S.mode=='t')$('#f').innerHTML=`<div class="fb b"><b>✗ ليست الإجابة.</b> ${w}<br>جرّب إجابة أخرى.</div>`;
+else{all().forEach(x=>{x.disabled=1;if(o[x.dataset.j][1]==a)x.classList.add('ok')});$('#f').innerHTML=`<div class="fb b"><b>✗ الإجابة الصحيحة بالأخضر.</b> ${w}</div>${nx}`;bn()}}})}
+
+const ST=['المهمة','أخذ العينة','التوقيت','الغربلة الرطبة','المشرف','الامتحان'];
+const FN=[s0,s1,s2,s3,s4,s5];
+function start(){M.innerHTML=`<div class=card><h2>مختبر الموقع: أنت فني أخذ العينات</h2><p><b>تصميم اللعبة: أحمد شاكر</b></p><p>تتعلم أخذ عينة الخرسانة الطازجة وفق <b>ASTM C172/C172M – 25</b> (النسخة المرفقة). الوسوم: <span class=tg>ASTM</span> متطلب المواصفة، <span class=tg>مشروع</span> متطلب خاص بالمشروع، <span class=tg>ممارسة</span> توضيح مختبري. الأزمنة في المحاكاة توضيحية.</p><label>اسم الفني<input id=nm value="${S?S.name:''}"></label><div><button class=pri onclick="beg('t')">وضع التدريب</button><button onclick="beg('p')">وضع التطبيق</button><button onclick="beg('c')">وضع التحدي</button></div>${S?`<button class=pri onclick="go(S.st)">استكمال من «${ST[S.st]}»</button>`:''}</div>`}
+function beg(m){const n=$('#nm').value.trim();if(!n){alert('اكتب اسمك أولاً');return}S={name:n,mode:m,st:0,mx:0,xp:0,err:0};go(0)}
+function pr(h){$('#pa').innerHTML=h}
+const fm=m=>`<div class="fb b"><b>✗ ${m[0]}</b><br>السبب: ${m[1]}<br>الصحيح: ${m[2]}<br>الأثر: ${m[3]}</div>`;
+function it(h,t,L,b){M.innerHTML=`<div class=card><h2>${h}</h2><p>${t}</p><button class=pri id=b>ابدأ</button></div>`;$('#b').onclick=()=>quiz(L,()=>{S.xp+=b;nxt()})}
+function ord(L,cb,h){let ch=[];const E=sh(L.map((x,i)=>i));function dr(){M.innerHTML=`<div class=card><h3>${h}</h3><ol>${ch.map(i=>`<li>${L[i]}</li>`).join('')}</ol>${E.filter(i=>!ch.includes(i)).map(i=>`<button class=op data-i=${i}>${L[i]}</button>`).join('')}<button id=u>تراجع</button><button class=pri id=k ${ch.length<L.length?'disabled':''}>تحقق</button><div id=f></div></div>`;
+M.querySelectorAll('.op').forEach(b=>b.onclick=()=>{ch.push(+b.dataset.i);dr()});$('#u').onclick=()=>{ch.pop();dr()};$('#k').onclick=()=>cb(ch.filter((x,i)=>x==i).length)}dr()}
+// ---- بنوك الأسئلة: [سؤال، خيارات، رقم الصحيح، تفسير، موضوع، حرج، تلميح، مصدر]
+const B0=[['ما الغاية من العينة المركّبة من أكثر من جزء؟',['أن تمثّل طبيعة وحالة الخرسانة المسلّمة للموقع','تسريع الاختبار','تقليل الكمية','تسهيل الحمل'],0,'البندان 1.1 و6.2: تمثيل الخرسانة كما سُلّمت، والعينة المركّبة مطلوبة إلا إذا استثنتها إجراءات الاختبار (ملاحظة 1).','مفاهيم',0,'العينة تمثّل الشاحنة كلها.'],
+['ما الحد الأدنى لحجم العينة لاختبارات المقاومة؟',['28 لتراً (1 ft³)','10 لترات','50 لتراً','5 لترات'],0,'البند 6.1: 28 L [1 ft³]؛ والأصغر غير ممنوع لاختبارات الهواء والحرارة والهبوط الروتينية، ويُحدَّد الحجم بالركام الأكبر.','مفاهيم',1],
+['أين تؤخذ العينة عادةً؟',['عند تسليح الخرسانة من الخلاطة إلى وسيلة النقل، وقد تحدد المواصفات نقطة أخرى كمخرج المضخة','دائماً من أول التصريف','دائماً من آخره','حيث يريد الفني'],0,'ملاحظة 2 (توضيحية) للبند 6.2.','مفاهيم',0,'','ASTM (ملاحظة)'],
+['ما الحد الأقصى بين أخذ أول وآخر جزء من العينة المركّبة؟',['15 دقيقة','5 دقائق','30 دقيقة','ساعة'],0,'البند 5.1.','التوقيت',1],
+['متى تبدأ اختبارات الهبوط والحرارة والهواء؟',['خلال 5 دقائق من أخذ آخر جزء للعينة المركّبة','خلال ساعة','بعد نقل العينة للمعمل','في آخر اليوم'],0,'البند 5.1.2.','التوقيت',1],
+['متى يبدأ صب عينات المقاومة؟',['خلال 15 دقيقة من تركيب العينة المركّبة','خلال 5 دقائق','بعد ساعتين','بعد ساعة'],0,'البند 5.1.2.','التوقيت',1],
+['ما الحماية المطلوبة للعينة قبل الاختبار؟',['من الشمس والريح وسرعة التبخر والتلوث','لا شيء','تغطيتها بالماء','تركها للجفاف'],0,'البند 5.1.2.','التوقيت',0]];
+const B1=[['خلاطة شاحنة: متى يجوز أخذ العينة؟',['بعد اكتمال إضافة الماء والمضافات وبعيداً عن أول التصريف وآخره','فور فتح البوابة','من آخر ما يخرج','قبل إضافة الملدّن'],0,'البند 6.2.3 (وC31 البند 7.1: بعد كل التعديلات).','طرق الأخذ',1,'العينة تمثّل الخلطة النهائية.'],
+['كيف يُضبط معدل تصريف الشاحنة أثناء الأخذ؟',['بسرعة دوران الدرّام لا بحجم فتحة البوابة','بفتح البوابة جزئياً','بإمالة الشاحنة','لا يهم'],0,'البند 6.2.3.','طرق الأخذ',0],
+['كيف تجمع الجزء من تيار التصريف؟',['تمرير الوعاء كاملاً عبر التيار أو تحويل التصريف كله إليه','أخذ كمية من حافة التيار','الغرف من الكومة بعد انتهاء التصريف','ملء المغرفة من السطح'],0,'البند 6.2.1: دون تقييد التدفق بما يسبب فصلاً حبيبياً.','طرق الأخذ',0],
+['خلاطة الرصف: كيف تؤخذ العينة؟',['بعد تفريغ المحتوى، من خمسة أجزاء مختلفة على الأقل من الكومة مع تجنب تلوثها بتربة الأساس','جزء واحد من القمة','جزءان من الحافة','قبل التفريغ'],0,'البند 6.2.2.','طرق الأخذ',0],
+['خلاط مستمر: متى تبدأ الأخذ؟',['بعد تصريف 140 L [5 ft³] على الأقل وبعد كل تعديلات النسب','فور التشغيل','بعد لتر واحد','بعد 10 لترات'],0,'البند 6.2.4.','طرق الأخذ',0],
+['بعد تركيب العينة من خلاط مستمر، كم تنتظر قبل الاختبار؟',['من دقيقتين إلى 5 دقائق','لا انتظار','30 دقيقة','ساعة'],0,'البند 6.2.4 (ملاحظة 5): ماء الخلط يُدخل قبل التصريف بثوانٍ فقط.','طرق الأخذ',0]];
+const B2=[['مضت 8 دقائق منذ آخر جزء ولم يبدأ الهبوط. التقييم؟',['مخالفة لحد 5 دقائق (5.1.2): يُوثَّق الانحراف والأسلم أخذ عينة جديدة','لا مشكلة','يُضاف 5 مم للهبوط','يكفي تغطية العينة'],0,'5.1.2 يلزم البدء خلال 5 دقائق. معالجة المخالفة بعينة جديدة ممارسة لأن النص لا يحدد الإجراء.','التوقيت',1],
+['استغرق أخذ أول وآخر جزء 20 دقيقة. التقييم؟',['مخالف: الحد 15 دقيقة (5.1)','مقبول','مقبول لأن الشاحنة بطيئة','يُقسم الزمن'],0,'البند 5.1.','التوقيت',1],
+['بدأت صب الأسطوانات بعد 25 دقيقة من تركيب العينة. التقييم؟',['مخالف: الحد 15 دقيقة (5.1.2)','مقبول','مقبول في الصيف','يكفي التغطية'],0,'البند 5.1.2.','التوقيت',1],
+['تركت العينة مكشوفة للشمس والريح 10 دقائق. أين الخلل؟',['5.1.2 يلزم حمايتها من الشمس والريح والتبخر والتلوث','لا خلل','في الوعاء','في الأسمنت'],0,'التبخر يغيّر القوام فلا تمثّل العينة الخرسانة المسلّمة.','التوقيت',0]];
+const B3=[['متى تُجرى الغربلة الرطبة؟',['عندما يكون الركام أكبر مما يناسب القوالب أو المعدات','دائماً','أبداً','لخفض الهواء'],0,'البند 7.1.','الغربلة',0],
+['ماذا تفعل بالركام المحجوز على المنخل؟',['يُزال ويُتخلص منه دون مسح الملاط الملتصق به','تمسح ملاطه ثم تلقيه','تعيده للعينة','تطحنه'],0,'البند 7.4.1.','الغربلة',0],
+['ما أقصى سمك لطبقة الركام المحجوزة على المنخل؟',['حبة واحدة','5 حبات','طبقة سميكة','لا يهم'],0,'البند 7.4.1: ضع على المنخل من الخرسانة بقدر ما يترك طبقة بسمك حبة.','الغربلة',0],
+['أين يسقط الخليط المار من المنخل؟',['وعاء خلط مرطّب مسبقاً أو سطح رطب نظيف غير ماص','لوح خشب جاف','تربة','سلة'],0,'البند 7.4.1.','الغربلة',0],
+['بعد إزالة الركام الكبير؟',['يُعاد الخلط بأقل قدر لازم ثم يبدأ الاختبار فوراً','يُخلط لساعة','تُخزَّن العينة','تُترك لتستقر'],0,'البند 7.4.1.','الغربلة',0],
+['اختبار الوزن الحجمي لحساب المردود: على أي خرسانة؟',['الخلطة الكاملة دون غربلة','المغربلة دائماً','لا فرق','المغربلة للهواء فقط'],0,'البند 7.1: استثناء اختبارات الوزن الحجمي لحسابات المردود على الخلطة الكاملة.','الغربلة',0],
+['هل للغربلة الرطبة أثر على النتائج؟',['نعم: تفقد بعض الهواء، والهواء في الجزء المغربل أعلى منه في الخلطة الكاملة','لا أثر','تزيد المقاومة دائماً فقط','تلغي المعايرة'],0,'ملاحظة 6 (توضيحية) للبند 7.1.','الغربلة',0,'','ASTM (ملاحظة)']];
+const B4=[['فنّي أخذ جزءاً واحداً من المنتصف وصبّ منه. الحكم؟',['غير مطابق: يلزم جزءان أو أكثر مركّبان (6.2.3)','مطابق لأنه من المنتصف','مطابق إن كان 28 لتراً','يُقبل بملاحظة'],0,'6.2.3: جزءان أو أكثر على فترات منتظمة.','المراقبة',1],
+['عينة 12 لتراً لصب أسطوانات مقاومة. القرار؟',['غير كافية: الحد الأدنى 28 L لعينات المقاومة (6.1)','كافية','كافية إن رُصّت جيداً','تُضاف مياه'],0,'6.1: الأصغر مسموح للهواء والحرارة والهبوط الروتينية فقط.','المراقبة',1],
+['المهندس طلب العينة من مخرج المضخة. الصحيح؟',['يُتبع ما تحدده المواصفات (الأصل عند التسليم للوسيلة، ملاحظة 2)','يُرفض دائماً','يؤخذ من أول الدفعة','يُعد مخالفاً تلقائياً'],0,'ملاحظة 2 توضيحية والقرار لمواصفات المشروع.','المراقبة',0,'','مشروع'],
+['مسح الفني ملاط الركام المحجوز قبل رميه. القرار؟',['مخالف: النص يمنع مسح الملاط الملتصق قبل التخلص (7.4.1)','سليم','يُمسح ويُضاف للعينة','يُرمى كله دون ملاحظة'],0,'البند 7.4.1.','المراقبة',0],
+['أضاف السائق ماء بعد أخذ العينة. الأثر؟',['العينة لا تمثل الخرسانة النهائية؛ تؤخذ بعد كل التعديلات','لا أثر','يُضاف 5 مم','تُهمل الإضافة'],0,'6.2.3 وC31 البند 7.1.','المراقبة',1],
+['جزء أُخذ من أول ما خرج من الشاحنة. القرار؟',['مخالف: لا أجزاء من أول أو آخر التصريف (6.2.3)','سليم إن كان سريعاً','سليم إن خُلط جيداً','يُحسب جزءاً ثانياً'],0,'ملاحظة 3 (توضيحية): لا قبل 10% ولا بعد 90% من الدفعة.','المراقبة',1]];
+const WS=['أخذ العينة المركّبة وفق 6.2','وضع الخرسانة على المنخل المحدد بطبقة بسمك حبة','هز المنخل حتى لا يبقى مادة أدق عليه','إزالة الركام المحجوز دون مسح ملاطه','سقوط المار في وعاء مرطّب أو سطح رطب غير ماص','كشط الملاط الملتصق بمعدات الغربلة وإضافته للخلطة','إعادة الخلط بأقل قدر لازم','البدء بالاختبار فوراً'];
+const OR=['التأكد من اكتمال إضافة الماء والمضافات','تجاوز الجزء الأول من التصريف','أخذ جزأين أو أكثر من المنتصف على فترات منتظمة','دمج الأجزاء وإعادة الخلط بأقل قدر','نقل العينة وحمايتها من الشمس والريح','بدء الهبوط والحرارة والهواء خلال 5 دقائق','بدء صب العينات خلال 15 دقيقة من تركيب العينة'];
+// ---- المراحل
+function s0(){it('استلام المهمة','وصلت شاحنة خرسانة جاهزة إلى الموقع، والمطلوب عينة تمثّلها لاختبارات الهبوط والحرارة والهواء وصب عينات المقاومة. إن لم تكن العينة ممثّلة فكل نتيجة بعدها بلا قيمة.',B0,20)}
+function s1(){let p=0,got=[],tm=null;
+M.innerHTML=`<div class=card><h2>أخذ العينة من شاحنة الخلط</h2><p>اضغط «ابدأ التصريف» ثم «خذ جزءاً» في اللحظات المناسبة (جزءان على الأقل) ثم «أنهِ العينة». كل ثانية = دقيقة محاكاة، والتصريف 20 دقيقة (توضيحي).</p><div class=trk id=tk>${S.mode=='t'?'<i class=z style="right:0;width:10%"></i><i class=z style="left:0;width:10%"></i>':''}<div id=bar></div></div><p id=stt>الحالة: لم يبدأ التصريف</p><p>الزمن: <b id=tm>0</b> د | الأجزاء: <b id=nn>0</b></p><label>طريقة الأخذ<select id=tc><option>تمرير الوعاء عبر كامل التيار</option><option>غرف من حافة التيار</option></select></label><button class=pri id=bs>ابدأ التصريف</button><button id=bt disabled>خذ جزءاً</button><button id=bf disabled>أنهِ العينة</button><div id=f></div></div>`;
+const stop=()=>{clearInterval(tm);tm=null},upd=()=>{$('#bar').style.width=p+'%';$('#tm').textContent=(p*.2).toFixed(1);$('#nn').textContent=got.length;$('#stt').textContent=p<5?'الحالة: إضافة الماء/الملدّن جارية':p>=100?'الحالة: انتهى التصريف':'الحالة: التصريف جارٍ'};
+$('#bs').onclick=()=>{$('#bs').disabled=1;$('#bt').disabled=0;$('#bf').disabled=0;tm=setInterval(()=>{p=Math.min(100,p+.5);upd();if(p>=100){stop();$('#bt').disabled=1}},100)};
+$('#bt').onclick=()=>{got.push([p,$('#tc').selectedIndex]);const m=document.createElement('i');m.className='mk';m.style.right=p+'%';$('#tk').appendChild(m);upd();good()};
+$('#bf').onclick=()=>{stop();const e=[],ps=got.map(g=>g[0]);
+if(got.length<2)e.push(['أقل من جزأين','6.2.3: عينة مركّبة من جزأين أو أكثر على فترات منتظمة','جزءان على الأقل','عينة لا تمثل تغير التصريف']);
+if(ps.some(x=>x<5))e.push(['أخذت قبل اكتمال الإضافات','6.2.3: لا عينة قبل إضافة كل الماء والمضافات','انتظر اكتمال الإضافات','لا تمثل الخلطة النهائية']);
+if(ps.some(x=>x>=5&&x<10))e.push(['جزء من أول التصريف','6.2.3: لا أجزاء من أول التصريف (ملاحظة 3 توضيحياً: لا قبل 10%)','خذ من الوسط','أول التصريف غير ممثل']);
+if(ps.some(x=>x>90))e.push(['جزء من آخر التصريف','6.2.3: لا أجزاء من آخر التصريف (ملاحظة 3 توضيحياً: لا بعد 90%)','خذ من الوسط','آخر التصريف غير ممثل']);
+if(got.length>1&&(Math.max(...ps)-Math.min(...ps))*.2>15)e.push(['تجاوز 15 دقيقة بين أول وآخر جزء','5.1: لا يزيد عن 15 دقيقة','قرّب الأجزاء زمنياً','مخالفة حد الزمن']);
+if(got.some(g=>g[1]==1))e.push(['طريقة أخذ خاطئة','6.2.1: تمرير الوعاء عبر كامل التيار أو تحويله كله','مرّر الوعاء عبر التيار كله','عينة منحازة لجزء من التيار']);
+S.err+=e.length;hud();
+if(e.length){bad();$('#f').innerHTML=e.map(fm).join('')+'<div class="fb b">العينة غير مطابقة وتُعاد على شاحنة جديدة.</div><button class=pri id=rt>أعد المحاولة</button>';$('#rt').onclick=s1;return}
+good();S.xp+=60;if(S.mode!='t')S.ok2=1;hud();sv();$('#f').innerHTML=`<div class="fb g"><b>✓ عينة مطابقة.</b> أخذت ${got.length} أجزاء من وسط التصريف بطريقة صحيحة.</div><button class=pri id=nx>أسئلة طرق الأخذ</button>`;$('#nx').onclick=()=>quiz(B1,()=>{S.xp+=20;nxt()})}}
+function s2(){it('التوقيت وحماية العينة','بعد أخذ العينة يبدأ العد التنازلي: حدود الزمن في C172 البند 5 تحمي تمثيل العينة.',B2,25)}
+function s3(){M.innerHTML=`<div class=card><h2>الغربلة الرطبة</h2><p>عندما يكون الركام أكبر مما يناسب القوالب أو المعدات، تُغربل العينة رطباً (البند 7). رتّب الخطوات أولاً.</p><button class=pri id=b>ابدأ</button></div>`;
+$('#b').onclick=()=>ord(WS,c=>{const f=$('#f');if(c==WS.length){good();S.xp+=40;hud();f.innerHTML=`<div class="fb g">✓ ترتيب صحيح.</div><button class=pri id=nx>أسئلة الغربلة</button>`;$('#nx').onclick=()=>quiz(B3,()=>{S.xp+=20;nxt()})}
+else{bad();S.err++;hud();f.innerHTML=`<div class="fb b">✗ ${c}/${WS.length} في موضعها. ${S.mode=='t'?'الترتيب الصحيح: '+WS.join(' ← '):'أعد المحاولة.'}</div><button class=pri id=rt>أعد</button>`;$('#rt').onclick=s3}},'رتّب خطوات الغربلة الرطبة')}
+function s4(){it('اختبار المهندس المشرف','سيناريوهات من الموقع: اكتشف الخطأ واتخذ القرار.',B4,30)}
+function s5(){M.innerHTML=`<div class=card><h2>الامتحان الشامل</h2><p>14 سؤالاً ثم ترتيب خطوات أخذ العينة، بلا تلميحات. الشهادة تشترط ≥80% وعدم الإخفاق في بند جوهري وإنجاز محاكاة أخذ العينة دون أخطاء في وضع التطبيق أو التحدي.</p><button class=pri id=b>ابدأ الامتحان</button></div>`;
+$('#b').onclick=()=>{FL=[];MS=[];const m=S.mode;S.mode='p';const Q=sh([].concat(B0,B1,B2,B3,B4)).slice(0,14);quiz(Q,r=>{S.mode=m;ord(OR,c=>{if(c<5){FL.push('ترتيب الخطوات');MS.push('ترتيب الخطوات')}res(r+Math.round(c/OR.length*3),Q.length+3)},'رتّب خطوات أخذ العينة والاختبار')})}}
+function res(p,tot){const pc=Math.round(p/tot*100),cr=[...new Set(FL)],ms=[...new Set(MS)],pass=pc>=80&&!cr.length&&S.ok2,why=[];
+if(pc<80)why.push('الدرجة دون 80%');if(cr.length)why.push('إخفاق في بنود جوهرية: '+cr.join('، '));if(!S.ok2)why.push('لم تُنجز محاكاة أخذ العينة بنجاح في وضع التطبيق أو التحدي');
+if(pass){S.cert=1;S.xp+=100;sv();hud()}
+M.innerHTML=`<div class=card><h2>${pass?'اجتزت الامتحان':'لم تتحقق شروط الإتقان'}</h2><p>الدرجة ${p}/${tot} — نسبة الإتقان ${pc}%</p>${why.length?`<div class="fb b">${why.join('<br>')}</div>`:''}<p><b>نقاط القوة:</b> ${['مفاهيم','طرق الأخذ','التوقيت','الغربلة','المراقبة'].filter(x=>!ms.includes(x)).join('، ')||'—'}</p><p><b>تحتاج تدريباً في:</b> ${ms.join('، ')||'لا شيء'}</p>${pass?`<button class=pri id=ce>عرض الشهادة</button>`:''}<button onclick=go(1)>إعادة المحاكاة</button><button onclick=s5()>إعادة الامتحان</button></div>`;
+if(pass)$('#ce').onclick=()=>{pr(`<div class=rep style="text-align:center"><h1>شهادة إتقان أخذ عينة الخرسانة الطازجة</h1><p>تشهد أكاديمية المختبر بأن</p><h2>${S.name}</h2><p>أتقن إجراء أخذ العينة وفق ASTM C172/C172M – 25 بنسبة ${pc}% (تدريب تعليمي، وليست شهادة اعتماد رسمية)</p><p>${new Date().toLocaleDateString('ar')} — الخبرة ${S.xp}</p><p>تصميم اللعبة: أحمد شاكر</p></div>`);document.body.classList.add('pp');print();document.body.classList.remove('pp')}}
+hud();start();
+</script></body></html>
