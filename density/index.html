@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>الوزن الحجمي والمردود والهواء — ASTM C138/C138M-24a</title>
+<style>
+:root{--bg:#e4e1da;--cd:#f7f5f0;--ink:#1d2630;--st:#2c5470;--am:#c98a1b;--ok:#2f8f5f;--er:#b8433a;--ln:#c9c4b8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 'Noto Kufi Arabic','Segoe UI',Tahoma,sans-serif}
+header{background:var(--st);color:#fff;padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+header h1{font-size:18px;margin:0}#h{font-size:14px}#pb{height:4px;background:#0003}#pr{height:4px;background:var(--am);transition:width .4s}
+nav{display:flex;gap:4px;overflow-x:auto;padding:8px;background:#d6d2c8}nav button{white-space:nowrap;font-size:13px;padding:5px 10px}nav .on{background:var(--st);color:#fff}
+main{max-width:980px;margin:14px auto;padding:0 12px}.card{background:var(--cd);border:1px solid var(--ln);border-radius:6px;padding:18px}
+button{font:inherit;border:1px solid var(--st);background:#fff;color:var(--st);border-radius:4px;padding:8px 14px;cursor:pointer;margin:3px}
+button:disabled{opacity:.45;cursor:default}button.pri{background:var(--st);color:#fff}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--am)}
+.op{display:block;width:100%;text-align:right}.ok{background:#d5eedf!important;border-color:var(--ok)!important;color:#145a37!important}.no{background:#f4d9d5!important;border-color:var(--er)!important;color:#7d2219!important}.sel{background:var(--st);color:#fff}
+.fb{padding:10px 14px;border-radius:4px;margin:10px 0;border-inline-start:5px solid}.g{background:#e3f3ea;border-color:var(--ok)}.b{background:#f8e4e1;border-color:var(--er)}.hint{color:#7a5300}
+.tg{background:var(--am);color:#fff;padding:1px 8px;border-radius:3px;font-size:12px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:700px){.g2{grid-template-columns:1fr}}
+.sv{width:100%;max-height:300px;background:#cfd6db;border-radius:4px}label{display:block;margin:6px 0;font-size:14px}input,select,textarea{font:inherit;width:100%;padding:6px;border:1px solid var(--ln);border-radius:4px}input[type=range]{padding:0}
+.ctl{background:#ecebe5;padding:8px;border-radius:4px;margin-bottom:8px}.nx{box-shadow:0 0 0 3px var(--am)}.eq{display:inline-block;margin:4px;padding:10px 12px}
+.sl path{transform-box:fill-box;transform-origin:50% 100%;animation:sk 1s ease-out}@keyframes sk{from{transform:scaleY(1.5)}}
+#pa{max-width:820px;margin:12px auto}.rep{background:#fff;border:2px solid var(--st);padding:20px}.rep td{border:1px solid var(--ln);padding:6px}.rep table{width:100%;border-collapse:collapse}
+@media(prefers-reduced-motion:reduce){.sl path{animation:none}}@media print{.pp header,.pp nav,.pp #pb,.pp main{display:none}}
+.trk{position:relative;height:22px;background:#d6d2c8;border-radius:4px;overflow:hidden;margin:10px 0}#bar{position:absolute;top:0;right:0;height:100%;width:0;background:#2c5470;opacity:.55}.z{position:absolute;top:0;height:100%;background:#b8433a40}.mk{position:absolute;top:0;width:4px;height:100%;background:#c98a1b}</style></head><body>
+<header><a href="../" style="color:#fff;text-decoration:none">← الرئيسية</a><h1>الوزن الحجمي والمردود والهواء — ASTM C138/C138M – 24a <small style="font-weight:400;font-size:13px;opacity:.85">| تصميم: أحمد شاكر</small></h1><div id="h"></div><button onclick="if(confirm('مسح التقدم والبدء من جديد؟')){localStorage.removeItem('sta_c138');S=null;hud();start()}">إعادة من البداية</button></header><div id="pb"><div id="pr"></div></div><nav id="nv"></nav><main id="m"></main><div id="pa"></div>
+<script>
+const $=s=>document.querySelector(s),M=$('#m'),R=a=>a[Math.random()*a.length|0],sh=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
+let S;try{S=JSON.parse(localStorage.getItem('sta_c138'))}catch(e){}
+const sv=()=>{try{localStorage.setItem('sta_c138',JSON.stringify(S))}catch(e){}};
+let ac;function snd(f,d=.12){try{ac=ac||new AudioContext();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.value=.05;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
+const good=()=>snd(660),bad=()=>snd(170,.3);
+function hud(){$('#h').textContent=S?`${S.name} | ${{t:'تدريب',p:'تطبيق',c:'تحدٍّ'}[S.mode]} | المستوى ${(1+S.xp/100)|0} | الخبرة ${S.xp} | الأخطاء ${S.err}`:'';$('#pr').style.width=S?(S.st/ST.length*100)+'%':'0';$('#nv').innerHTML=S?ST.map((n,i)=>`<button class="${i==S.st?'on':''}" ${i>S.mx?'disabled':''} onclick="go(${i})">${n}</button>`).join(''):''}
+function go(i){S.st=i;S.mx=Math.max(S.mx,i);sv();hud();FN[i]()}
+const nxt=()=>go(S.st+1);
+let FL=[],MS=[];
+function quiz(L,done,i=0,r=0){if(i>=L.length){done(r);return}
+const [qq,oo,a,w,tp,c,h,s]=L[i],o=sh(oo.map((x,k)=>[x,k]));let f=0;
+M.innerHTML=`<div class=card><small>سؤال ${i+1}/${L.length} <span class=tg>${s||'ASTM'}</span></small><h3>${qq}</h3><div>${o.map((x,j)=>`<button class=op data-j=${j}>${x[0]}</button>`).join('')}</div><div id=f>${S.mode=='t'&&h?`<p class=hint>تلميح: ${h}</p>`:''}</div></div>`;
+const all=()=>M.querySelectorAll('.op');
+all().forEach(b=>b.onclick=()=>{const k=o[b.dataset.j][1],nx=`<button class=pri id=nx>التالي</button>`,bn=()=>{$('#nx').onclick=()=>quiz(L,done,i+1,r)};
+if(k==a){good();b.classList.add('ok');if(!f){r++;S.xp+=S.mode=='t'?6:10}all().forEach(x=>x.disabled=1);$('#f').innerHTML=`<div class="fb g"><b>✓ صحيح.</b> ${w}</div>${nx}`;hud();sv();bn()}
+else{bad();if(!f){f=1;S.err++;MS.push(tp);if(c)FL.push(tp)}b.classList.add('no');b.disabled=1;hud();
+if(S.mode=='t')$('#f').innerHTML=`<div class="fb b"><b>✗ ليست الإجابة.</b> ${w}<br>جرّب إجابة أخرى.</div>`;
+else{all().forEach(x=>{x.disabled=1;if(o[x.dataset.j][1]==a)x.classList.add('ok')});$('#f').innerHTML=`<div class="fb b"><b>✗ الإجابة الصحيحة بالأخضر.</b> ${w}</div>${nx}`;bn()}}})}
+
+function pr(h){$('#pa').innerHTML=h}
+const fm=m=>`<div class="fb b"><b>✗ ${m[0]}</b><br>السبب: ${m[1]}<br>الصحيح: ${m[2]}<br>الأثر: ${m[3]}</div>`;
+function it(h,t,L,b){M.innerHTML=`<div class=card><h2>${h}</h2><p>${t}</p><button class=pri id=b>ابدأ</button></div>`;$('#b').onclick=()=>quiz(L,()=>{S.xp+=b;nxt()})}
+function ord(L,cb,h){let ch=[];const E=sh(L.map((x,i)=>i));function dr(){M.innerHTML=`<div class=card><h3>${h}</h3><ol>${ch.map(i=>`<li>${L[i]}</li>`).join('')}</ol>${E.filter(i=>!ch.includes(i)).map(i=>`<button class=op data-i=${i}>${L[i]}</button>`).join('')}<button id=u>تراجع</button><button class=pri id=k ${ch.length<L.length?'disabled':''}>تحقق</button><div id=f></div></div>`;
+M.querySelectorAll('.op').forEach(b=>b.onclick=()=>{ch.push(+b.dataset.i);dr()});$('#u').onclick=()=>{ch.pop();dr()};$('#k').onclick=()=>cb(ch.filter((x,i)=>x==i).length)}dr()}
+
+
+const ST=['المهمة','المعدات','التنفيذ','الحسابات','المراقب','الامتحان'];
+const FN=[s0,s1,s2,s3,s4,s5];
+function start(){M.innerHTML=`<div class=card><h2>مختبر الموقع: أنت فني الوزن الحجمي</h2><p><b>تصميم اللعبة: أحمد شاكر</b></p><p>تتعلم قياس الوزن الحجمي وحساب المردود ومحتوى الأسمنت والهواء (الوزني) وفق <b>ASTM C138/C138M – 24a</b> (النسخة المرفقة). الوسوم: <span class=tg>ASTM</span> متطلب المواصفة، <span class=tg>مشروع</span> متطلب خاص بالمشروع، <span class=tg>ممارسة</span> توضيح مختبري. أرقام المحاكاة توضيحية.</p><label>اسم الفني<input id=nm value="${S?S.name:''}"></label><div><button class=pri onclick="beg('t')">وضع التدريب</button><button onclick="beg('p')">وضع التطبيق</button><button onclick="beg('c')">وضع التحدي</button></div>${S?`<button class=pri onclick="go(S.st)">استكمال من «${ST[S.st]}»</button>`:''}</div>`}
+function beg(m){const n=$('#nm').value.trim();if(!n){alert('اكتب اسمك أولاً');return}S={name:n,mode:m,st:0,mx:0,xp:0,err:0};go(0)}
+// ---- بنوك الأسئلة: [سؤال، خيارات، رقم الصحيح، تفسير، موضوع، حرج، تلميح، مصدر]
+const B0=[['ما الذي تحدده C138؟',['الوزن الحجمي والمردود ومحتوى الأسمنت ومحتوى الهواء (وزنياً)','المقاومة والمرونة','الهبوط والتماسك','النفاذية والانكماش'],0,'البند 1.1.','مفاهيم',0],
+['ما المقصود بالمردود (Yield)؟',['حجم الخرسانة الناتج من خلطة معلومة الكميات','وزن الأسمنت','عدد المكعبات','نسبة الماء'],0,'البند 1.1.','مفاهيم',0],
+['ماذا يعني مصطلح «Unit Weight» القديم؟',['الكتلة لكل وحدة حجم، أي الوزن الحجمي (Density)','قوة الضغط','الهبوط','الحرارة'],0,'ملاحظة 1 للبند 1.3.','مفاهيم',0,'','ASTM (ملاحظة)'],
+['متى يكون المردود النسبي Ry أكبر من 1.00؟',['حين تنتج الخلطة خرسانة أكثر من حجمها التصميمي','حين تكون الخلطة ناقصة','حين يكون الهواء مرتفعاً','لا معنى له'],0,'ملاحظة 11 للبند 7.4: أقل من 1.00 يعني أن الخلطة «ناقصة».','مفاهيم',0,'','ASTM (ملاحظة)'],
+['على أي أساس تُؤخذ كتلة الركام عند حساب الحجوم المطلقة؟',['حالة الإشباع الجاف السطحي (SSD)','الحالة الجافة','الحالة المبللة','كما هي بالموقع'],0,'البند 7.2.1.','مفاهيم',0]];
+const B1=[['ركام اسمي أكبر 37.5 مم: أقل سعة للوعاء؟',['11 لتراً','6 لترات','14 لتراً','28 لتراً'],0,'جدول 1.','المعدات',1,'راجع جدول 1.'],
+['ركام اسمي أكبر 50 مم: أقل سعة للوعاء؟',['14 لتراً','6 لترات','11 لتراً','28 لتراً'],0,'جدول 1.','المعدات',1],
+['ركام اسمي أكبر 75 مم: أقل سعة للوعاء؟',['28 لتراً','14 لتراً','11 لتراً','70 لتراً'],0,'جدول 1.','المعدات',1],
+['ما أدنى حجم فعلي للوعاء بالنسبة للسعة الاسمية في الجدول؟',['95% منها','80%','100% بالضبط','120%'],0,'حاشية جدول 1.','المعدات',0],
+['ما دقة الميزان المطلوبة؟',['45 جم [0.1 lb] أو 0.3% من الحمل، أيهما أكبر','1 جم','1 كجم','لا شرط'],0,'البند 4.1.','المعدات',0],
+['ما كتلة المطرقة لوعاء 14 لتراً أو أصغر؟',['600 ± 200 جم','1000 ± 200 جم','100 جم','2 كجم'],0,'البند 4.6.','المعدات',0],
+['ما مواصفات المهتز الداخلي؟',['تردد 9000 اهتزاز/د (150 هرتز) على الأقل وقطر 19–38 مم','تردد 1000 وقطر 60 مم','لا شروط','تردد 3000 وقطر 10 مم'],0,'البند 4.3.','المعدات',0],
+['كل كم يُتحقق من تردد المهتز بمقياس القصبة؟',['بفاصل لا يتجاوز سنتين (أو أقل إن أوصى المصنّع)','كل شهر','مرة بالعمر','لا يلزم'],0,'البند 4.3.','المعدات',0],
+['ما شروط لوح التسوية؟',['معدن ≥6 مم أو زجاج/أكريليك ≥12 مم، وأبعاده تزيد 50 مم على الأقل عن قطر الوعاء','أي لوح','خشب','ورق'],0,'البند 4.5.','المعدات',0]];
+const B2=[['كيف تُحدَّد طريقة الدمك؟',['حسب الهبوط ما لم تحدد المواصفات طريقة','حسب رغبة الفني','دائماً بالقضيب','دائماً بالاهتزاز'],0,'البند 6.3.','الدمك',0],
+['هبوط 110 مم: ما طريقة الدمك؟',['القضيب (الهبوط أكبر من 75 مم)','الاهتزاز فقط','أي منهما','لا دمك'],0,'البند 6.3.','الدمك',1],
+['هبوط 15 مم: ما طريقة الدمك؟',['الاهتزاز (الهبوط أقل من 25 مم)','القضيب','أي منهما','لا دمك'],0,'البند 6.3.','الدمك',1],
+['هبوط 50 مم: ما طريقة الدمك؟',['القضيب أو الاهتزاز','القضيب فقط','الاهتزاز فقط','لا دمك'],0,'البند 6.3.','الدمك',0],
+['وعاء 28 لتراً بالقضيب: كم ضربة لكل طبقة؟',['50','25','10','100'],0,'البند 6.5: 25 للأوعية 14 لتراً فأقل و50 للوعاء 28 لتراً.','الدمك',1],
+['وعاء 7 لترات بالقضيب: كم ضربة لكل طبقة؟',['25','50','10','100'],0,'البند 6.5.','الدمك',1],
+['ما الفائض الأمثل فوق حافة الوعاء بعد الدمك؟',['نحو 3 مم','10 سم','لا فائض','نقص 1 سم'],0,'البند 6.7.','الدمك',0],
+['كيف تُسوّى الخرسانة بلوح التسوية؟',['ضغط اللوح على ثلثي السطح وسحبه بحركة نشر، ثم الثلث الباقي حتى ينزلق خارجاً','بضغطة واحدة','بالأصابع','بالمالج'],0,'البند 6.8.','الدمك',0]];
+const B3=[['لأي دقة يُبلَّغ الوزن الحجمي؟',['أقرب 1.0 كجم/م³ [0.1 lb/ft³]','أقرب 0.01','أقرب 10','أقرب 100'],0,'البند 8.1.4.','الحسابات',0],
+['لأي دقة يُبلَّغ حجم الوعاء؟',['أقرب 0.01 لتر','أقرب 1 لتر','أقرب 0.1 لتر','أقرب 10 لترات'],0,'البند 8.1.3.','الحسابات',0],
+['لأي دقة يُبلَّغ محتوى الهواء؟',['أقرب 0.1%','أقرب 1%','أقرب 0.01%','أقرب 5%'],0,'البند 8.1.9.','الحسابات',0],
+['لأي دقة يُبلَّغ المردود؟',['أقرب 0.1 م³','أقرب 0.01 م³','أقرب 1 م³','أقرب 10 م³'],0,'البند 8.1.6.','الحسابات',0],
+['لأي دقة يُبلَّغ المردود النسبي؟',['أقرب 0.01','أقرب 0.1','أقرب 1','أقرب 0.001'],0,'البند 8.1.7.','الحسابات',0],
+['ما الكثافة النسبية المسموح بها للأسمنت البورتلاندي المطابق لـ C150 إن لم تُقَس؟',['3.15','2.65','1.00','2.00'],0,'البند 7.2.1.','الحسابات',0],
+['لأي دقة يُبلَّغ محتوى الأسمنت؟',['أقرب 0.5 كجم [1.0 lb]','أقرب 0.1 كجم','أقرب 5 كجم','لا يُبلَّغ'],0,'البند 8.1.8.','الحسابات',0],
+['أقصى فرق مقبول بين اختبارين لمشغّل واحد على العينة نفسها؟',['29.6 كجم/م³ [1.85 lb/ft³]','1 كجم/م³','100 كجم/م³','لا حد'],0,'البند 9.1.1 (d2s). ولمشغّلين مختلفين 37.0 كجم/م³ (9.1.2).','الحسابات',0]];
+const B4=[['استخدم الفني وعاء 6 لترات لخرسانة ركامها الأكبر 50 مم. الحكم؟',['مخالف: الحد الأدنى 14 لتراً (جدول 1)','سليم','سليم إن رُصّ جيداً','يُقبل بملاحظة'],0,'جدول 1.','المراقبة',1],
+['دمك الفني 25 ضربة لكل طبقة في وعاء 28 لتراً. الحكم؟',['مخالف: المطلوب 50 ضربة (6.5)','سليم','سليم إن طالت المدة','يُضاف طبقة'],0,'البند 6.5.','المراقبة',1],
+['لم يزن الفني الوعاء فارغاً قبل الملء. الحكم؟',['مخالف: تُحدَّد كتلة الوعاء الفارغ (6.1) ولا تُحسب الكثافة بدونها','سليم','يكفي تقدير الكتلة','تؤخذ كتلة من اختبار سابق'],0,'البند 6.1 والمعادلة (1).','المراقبة',1],
+['ترك الفني ماءً راكداً في قاع الوعاء. الحكم؟',['مخالف: يُرطَّب الوعاء ويُزال الماء الراكد (6.1)','سليم','الماء يحسّن الدمك','يُضاف للكتلة'],0,'البند 6.1.','المراقبة',0],
+['لامس المهتز قاع الوعاء أثناء دمك الطبقة السفلى. الحكم؟',['مخالف: لا يلامس القاع أو الجدران (6.6)','سليم','سليم إن كان سريعاً','تُعاد الطبقة العليا فقط'],0,'البند 6.6.','المراقبة',0],
+['بقي فائض كبير فوق الحافة وسُوِّي مباشرة. الحكم؟',['يُزال جزء ممثل من الفائض بالمالج قبل التسوية (6.7)','سليم','يُسحق الفائض بلوح التسوية','يُضاف ماء'],0,'البند 6.7.','المراقبة',0],
+['حُسب Ry = 0.97 لخلطة. ماذا يعني؟',['الخلطة «ناقصة» عن حجمها التصميمي (ملاحظة 11)','خلطة ممتازة','خطأ في الميزان حتماً','زيادة في الأسمنت'],0,'ملاحظة 11.','المراقبة',0,'','ASTM (ملاحظة)']];
+const OR=['ترطيب الوعاء وإزالة الماء الراكد','وزن الوعاء فارغاً ووضعه على سطح مستوٍ صلب','اختيار طريقة الدمك حسب الهبوط','ملء الطبقة الأولى ودمكها (والنقر 10–15 مرة عند القضيب)','ملء باقي الطبقات ودمكها بالطريقة نفسها','إزالة الفائض الكبير ثم التسوية بلوح التسوية','تنظيف السطح الخارجي للوعاء','وزن الوعاء مع الخرسانة','حساب الكثافة (Mc − Mm) ÷ Vm','حساب المردود والهواء وإبلاغ النتائج'];
+// ---- المراحل
+function s0(){it('استلام المهمة','وصلت عينة خرسانة جاهزة للموقع. المطلوب وزنها الحجمي، ومنه المردود (هل حصلنا على الحجم الذي دفعنا ثمنه؟) ومحتوى الهواء ومحتوى الأسمنت.',B0,20)}
+function s1(){it('المعدات','اختيار الوعاء والميزان والمطرقة والمهتز وفق البند 4 وجدول 1.',B1,30)}
+function s2(){const NM=R([25,37.5,50,75]),MIN={25:6,37.5:11,50:14,75:28}[NM],SL=R([15,50,110]),tr=S.mode=='t',o=(a,u)=>a.map(x=>`<option>${x}${u}</option>`).join('');
+M.innerHTML=`<div class=card><h2>تنفيذ الاختبار</h2><p>الركام الاسمي الأكبر: <b>${NM} مم</b> | هبوط الخرسانة المقاس: <b>${SL} مم</b>. اضبط الإعدادات ثم نفّذ.</p>${tr?`<p class=hint>تلميح: راجع جدول 1 والبندين 6.3 و6.5.</p>`:''}<div class=ctl><label>سعة الوعاء<select id=a1>${o([6,11,14,28],' لتر')}</select></label><label>طريقة الدمك<select id=a2><option>الدمك بالقضيب</option><option>الاهتزاز الداخلي</option></select></label><label>عدد الطبقات<select id=a3>${o([2,3,4],' طبقة')}</select></label><label>عدد الضربات (قضيب) أو إدخالات المهتز لكل طبقة<input id=a4 type=number value=10 min=1 max=100></label><label>النقر بالمطرقة بعد كل طبقة (للقضيب)<select id=a5><option>10–15 نقرة</option><option>لا نقر</option><option>3 نقرات</option></select></label><label>المطرقة<select id=a7><option>600 ± 200 جم</option><option>1000 ± 200 جم</option></select></label><label>الوعاء قبل الملء<select id=a6><option>مرطّب مع إزالة الماء الراكد</option><option>جاف</option><option>فيه ماء راكد</option></select></label><label>الكتلة الفارغة<select id=a10><option>وُزن الوعاء فارغاً</option><option>لم يُوزن فارغاً</option></select></label><label>الفائض بعد الدمك<select id=a9><option>نحو 3 مم فوق الحافة</option><option>فائض كبير بلا إزالة</option><option>نقص دون إضافة</option></select></label><label>التسوية<select id=a8><option>لوح التسوية: ثلثا السطح ثم الباقي بحركة نشر</option><option>لوح التسوية بضغطة واحدة دون نشر</option><option>بالمالج فقط</option></select></label></div><button class=pri id=go>نفّذ الاختبار</button><div id=f></div></div>`;
+const q=id=>$('#'+id);
+q('go').onclick=()=>{const cap=[6,11,14,28][q('a1').selectedIndex],vib=q('a2').selectedIndex==1,ly=[2,3,4][q('a3').selectedIndex],n=+q('a4').value,e=[],ok=(c,m)=>{if(!c)e.push(m)};
+ok(cap>=MIN,['وعاء أصغر من المطلوب','جدول 1: الركام '+NM+' مم يلزمه '+MIN+' لتراً على الأقل','وعاء لا تقل سعته عن '+MIN+' لتراً','نتيجة غير ممثلة لخرسانة بركام كبير']);
+ok(vib?SL<=75:SL>=25,['طريقة دمك لا تناسب الهبوط','6.3: القضيب إذا الهبوط >75 مم، والاهتزاز إذا <25 مم، وأيهما بين 25 و75 مم','القضيب لهبوط أكبر من 75، والاهتزاز لهبوط أقل من 25','دمك غير مطابق للمواصفة']);
+ok(ly==(vib?2:3),['عدد طبقات خاطئ','6.5: ثلاث طبقات للقضيب، و6.6: طبقتان للاهتزاز','3 للقضيب و2 للاهتزاز','توزيع دمك غير مطابق']);
+if(vib)ok(n==3,['عدد إدخالات المهتز','6.6: ثلاث إدخالات لكل طبقة','3 إدخالات لكل طبقة','دمك غير منتظم']);
+else{ok(n==(cap>14?50:25),['عدد الضربات خاطئ','6.5: 25 ضربة للأوعية حتى 14 لتراً و50 للوعاء 28 لتراً','25 أو 50 حسب السعة','دمك ناقص أو زائد']);
+ok(q('a5').selectedIndex==0,['النقر بالمطرقة','6.5: النقر 10 إلى 15 مرة بعد كل طبقة','10–15 نقرة','فراغات وفقاعات محبوسة']);
+ok(q('a7').selectedIndex==(cap>14?1:0),['مطرقة غير مناسبة','4.6: 600±200 جم للوعاء 14 لتراً فأقل و1000±200 جم لما فوق','المطرقة المناسبة للسعة','نقر غير فعّال أو ضار بالوعاء'])}
+ok(q('a6').selectedIndex==0,['حالة الوعاء قبل الملء','6.1: يُرطَّب الوعاء ويُزال الماء الراكد من قاعه','رطّب وأزل الماء الراكد','ماء راكد يزيد الحجم الظاهري للخلطة (توضيحي)']);
+ok(q('a10').selectedIndex==0,['لم يُوزن الوعاء فارغاً','6.1: تُحدَّد كتلة الوعاء الفارغ','زنه فارغاً قبل الملء','لا يمكن حساب الكثافة']);
+ok(q('a9').selectedIndex==0,['الفائض بعد الدمك','6.7: الفائض الأمثل نحو 3 مم، ويُصحَّح النقص ويُزال الفائض الكبير قبل التسوية','نحو 3 مم فوق الحافة','حجم غير دقيق']);
+ok(q('a8').selectedIndex==0,['طريقة التسوية','6.8: لوح التسوية على ثلثي السطح بحركة نشر ثم الثلث الباقي','تسوية بالنشر على مرحلتين','سطح غير مستوٍ وحجم غير دقيق']);
+S.err+=e.length;hud();
+if(e.length){bad();q('f').innerHTML=e.map(fm).join('')+'<div class="fb b">الاختبار غير مطابق؛ عدّل الإعدادات وأعد.</div>';return}
+good();S.xp+=70;if(S.mode!='t')S.ok1=1;hud();sv();q('go').disabled=1;q('f').innerHTML=`<div class="fb g"><b>✓ تنفيذ مطابق.</b> الوعاء مملوء ومسوّى وموزون، والمطلوب الآن الحسابات.</div><button class=pri id=nx>إلى الحسابات</button>`;q('nx').onclick=()=>quiz(B2,()=>{S.xp+=20;nxt()})}}
+function s3(){const k=R([.5,1,2]),Vm=R([.007,.014]),Mm=+(3+Math.random()*2).toFixed(2),Mc=+(Mm+R([2310,2335,2360,2390])*Vm).toFixed(2),D=Math.round((Mc-Mm)/Vm),cem=3560*k,coa=10846*k,fin=7845*k,wat=1570*k,Mt=cem+coa+fin+wat,V=cem/3150+coa/2720+fin/2630+wat/1000,T=Mt/V,A=(T-D)/T*100,Y=Mt/D,Ry=Y/(10*k),C=cem/Y,SSD=10975*k/1.02*1.008,tr=S.mode=='t';
+const L=[['coa','كتلة الركام الخشن SSD (كجم)',SSD,4,'SSD = المُسلَّم ÷ (1 + الرطوبة) × (1 + الامتصاص)'],['d','الوزن الحجمي D (كجم/م³، أقرب 1)',D,1,'D = (Mc − Mm) ÷ Vm'],['t','الكثافة النظرية T (كجم/م³)',T,2,'T = M ÷ V، حيث V = مجموع (الكتلة ÷ (1000 × الكثافة النسبية))'],['a','محتوى الهواء A (% أقرب 0.1)',A,.15,'A = (T − D) ÷ T × 100'],['y','المردود Y (م³ أقرب 0.1)',Y,.1,'Y = M ÷ D'],['r','المردود النسبي Ry (أقرب 0.01)',Ry,.011,'Ry = Y ÷ Yd'],['c','محتوى الأسمنت C (كجم/م³، أقرب 0.5)',C,1.5,'C = Cb ÷ Y']];
+M.innerHTML=`<div class=card><h2>الحسابات</h2><p>الوعاء: <b>${(Vm*1000).toFixed(2)} لتر</b> (Vm = ${Vm} م³) | وعاء فارغاً Mm = <b>${Mm.toFixed(2)} كجم</b> | مع الخرسانة Mc = <b>${Mc.toFixed(2)} كجم</b></p><p>الخلطة (كجم): أسمنت <b>${cem}</b> (كثافة نسبية 3.15) | ركام خشن كما سُلّم <b>${10975*k}</b> (رطوبة 2.0%، امتصاص 0.8%، كثافة نسبية SSD 2.72) | ركام ناعم SSD <b>${fin}</b> (2.63) | ماء الخلط الكلي <b>${wat}</b> | الحجم التصميمي Yd = <b>${10*k} م³</b>. الكتلة الكلية للخلطة M = ${Mt} كجم.</p><p>استخدم الأرقام كما هي، وفروق التقريب الصغيرة بين الحجوم الوسيطة مقبولة (كما في المثال المحلول في المواصفة).</p>${L.map(x=>`<label>${x[1]}<input id=i_${x[0]} type=number step=any></label>`).join('')}<button class=pri id=ck>تحقق</button><div id=f></div></div>`;
+$('#ck').onclick=()=>{const w=L.filter(x=>{const v=parseFloat($('#i_'+x[0]).value);return isNaN(v)||Math.abs(v-x[2])>x[3]});S.err+=w.length;hud();
+if(w.length){bad();$('#f').innerHTML=w.map(x=>fm(['حساب غير صحيح: '+x[1],'المعادلة: '+x[4],tr?'القيمة الصحيحة ≈ '+x[2].toFixed(x[0]=='a'||x[0]=='y'||x[0]=='r'?2:0):'أعد الحساب بهذه المعادلة','نتيجة مُبلَّغة خاطئة'])).join('');return}
+good();S.xp+=80;if(S.mode!='t')S.ok2=1;hud();sv();$('#ck').disabled=1;$('#f').innerHTML=`<div class="fb g"><b>✓ كل الحسابات صحيحة.</b> الهواء ${A.toFixed(1)}% والمردود النسبي ${Ry.toFixed(2)}.</div><button class=pri id=nx>أسئلة الإبلاغ</button>`;$('#nx').onclick=()=>quiz(B3,()=>{S.xp+=20;nxt()})}}
+function s4(){it('اختبار المهندس المشرف','سيناريوهات من الموقع: اكتشف الخطأ واتخذ القرار.',B4,30)}
+function s5(){M.innerHTML=`<div class=card><h2>الامتحان الشامل</h2><p>14 سؤالاً ثم ترتيب الخطوات، بلا تلميحات. الشهادة تشترط ≥80% وعدم الإخفاق في بند جوهري، وإنجاز التنفيذ والحسابات بنجاح في وضع التطبيق أو التحدي.</p><button class=pri id=b>ابدأ الامتحان</button></div>`;
+$('#b').onclick=()=>{FL=[];MS=[];const m=S.mode;S.mode='p';const Q=sh([].concat(B0,B1,B2,B3,B4)).slice(0,14);quiz(Q,r=>{S.mode=m;ord(OR,c=>{if(c<7){FL.push('ترتيب الخطوات');MS.push('ترتيب الخطوات')}res(r+Math.round(c/OR.length*3),Q.length+3)},'رتّب خطوات الاختبار والحساب')})}}
+function res(p,tot){const pc=Math.round(p/tot*100),cr=[...new Set(FL)],ms=[...new Set(MS)],pass=pc>=80&&!cr.length&&S.ok1&&S.ok2,why=[];
+if(pc<80)why.push('الدرجة دون 80%');if(cr.length)why.push('إخفاق في بنود جوهرية: '+cr.join('، '));if(!(S.ok1&&S.ok2))why.push('لم تُنجز التنفيذ والحسابات بنجاح في وضع التطبيق أو التحدي');
+if(pass){S.cert=1;S.xp+=100;sv();hud()}
+M.innerHTML=`<div class=card><h2>${pass?'اجتزت الامتحان':'لم تتحقق شروط الإتقان'}</h2><p>الدرجة ${p}/${tot} — نسبة الإتقان ${pc}%</p>${why.length?`<div class="fb b">${why.join('<br>')}</div>`:''}<p><b>نقاط القوة:</b> ${['مفاهيم','المعدات','الدمك','الحسابات','المراقبة'].filter(x=>!ms.includes(x)).join('، ')||'—'}</p><p><b>تحتاج تدريباً في:</b> ${ms.join('، ')||'لا شيء'}</p>${pass?`<button class=pri id=ce>عرض الشهادة</button>`:''}<button onclick=go(2)>إعادة التنفيذ</button><button onclick=s5()>إعادة الامتحان</button></div>`;
+if(pass)$('#ce').onclick=()=>{pr(`<div class=rep style="text-align:center"><h1>شهادة إتقان الوزن الحجمي والمردود ومحتوى الهواء</h1><p>تشهد أكاديمية المختبر بأن</p><h2>${S.name}</h2><p>أتقن الإجراء والحسابات وفق ASTM C138/C138M – 24a بنسبة ${pc}% (تدريب تعليمي، وليست شهادة اعتماد رسمية)</p><p>${new Date().toLocaleDateString('ar')} — الخبرة ${S.xp}</p><p>تصميم اللعبة: أحمد شاكر</p></div>`);document.body.classList.add('pp');print();document.body.classList.remove('pp')}}
+hud();start();
+</script></body></html>
