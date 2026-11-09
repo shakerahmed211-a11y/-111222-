@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>محتوى الهواء بالطريقة الحجمية — ASTM C173/C173M-26</title>
+<style>
+:root{--bg:#e4e1da;--cd:#f7f5f0;--ink:#1d2630;--st:#2c5470;--am:#c98a1b;--ok:#2f8f5f;--er:#b8433a;--ln:#c9c4b8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 'Noto Kufi Arabic','Segoe UI',Tahoma,sans-serif}
+header{background:var(--st);color:#fff;padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+header h1{font-size:18px;margin:0}#h{font-size:14px}#pb{height:4px;background:#0003}#pr{height:4px;background:var(--am);transition:width .4s}
+nav{display:flex;gap:4px;overflow-x:auto;padding:8px;background:#d6d2c8}nav button{white-space:nowrap;font-size:13px;padding:5px 10px}nav .on{background:var(--st);color:#fff}
+main{max-width:980px;margin:14px auto;padding:0 12px}.card{background:var(--cd);border:1px solid var(--ln);border-radius:6px;padding:18px}
+button{font:inherit;border:1px solid var(--st);background:#fff;color:var(--st);border-radius:4px;padding:8px 14px;cursor:pointer;margin:3px}
+button:disabled{opacity:.45;cursor:default}button.pri{background:var(--st);color:#fff}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--am)}
+.op{display:block;width:100%;text-align:right}.ok{background:#d5eedf!important;border-color:var(--ok)!important;color:#145a37!important}.no{background:#f4d9d5!important;border-color:var(--er)!important;color:#7d2219!important}.sel{background:var(--st);color:#fff}
+.fb{padding:10px 14px;border-radius:4px;margin:10px 0;border-inline-start:5px solid}.g{background:#e3f3ea;border-color:var(--ok)}.b{background:#f8e4e1;border-color:var(--er)}.hint{color:#7a5300}
+.tg{background:var(--am);color:#fff;padding:1px 8px;border-radius:3px;font-size:12px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:700px){.g2{grid-template-columns:1fr}}
+.sv{width:100%;max-height:300px;background:#cfd6db;border-radius:4px}label{display:block;margin:6px 0;font-size:14px}input,select,textarea{font:inherit;width:100%;padding:6px;border:1px solid var(--ln);border-radius:4px}input[type=range]{padding:0}
+.ctl{background:#ecebe5;padding:8px;border-radius:4px;margin-bottom:8px}.nx{box-shadow:0 0 0 3px var(--am)}.eq{display:inline-block;margin:4px;padding:10px 12px}
+.sl path{transform-box:fill-box;transform-origin:50% 100%;animation:sk 1s ease-out}@keyframes sk{from{transform:scaleY(1.5)}}
+#pa{max-width:820px;margin:12px auto}.rep{background:#fff;border:2px solid var(--st);padding:20px}.rep td{border:1px solid var(--ln);padding:6px}.rep table{width:100%;border-collapse:collapse}
+@media(prefers-reduced-motion:reduce){.sl path{animation:none}}@media print{.pp header,.pp nav,.pp #pb,.pp main{display:none}}
+.trk{position:relative;height:22px;background:#d6d2c8;border-radius:4px;overflow:hidden;margin:10px 0}#bar{position:absolute;top:0;right:0;height:100%;width:0;background:#2c5470;opacity:.55}.z{position:absolute;top:0;height:100%;background:#b8433a40}.mk{position:absolute;top:0;width:4px;height:100%;background:#c98a1b}</style></head><body>
+<header><a href="../" style="color:#fff;text-decoration:none">← الرئيسية</a><h1>محتوى الهواء بالطريقة الحجمية — ASTM C173/C173M – 26 <small style="font-weight:400;font-size:13px;opacity:.85">| تصميم: أحمد شاكر</small></h1><div id="h"></div><button onclick="if(confirm('مسح التقدم والبدء من جديد؟')){localStorage.removeItem('sta_c173');S=null;hud();start()}">إعادة من البداية</button></header><div id="pb"><div id="pr"></div></div><nav id="nv"></nav><main id="m"></main><div id="pa"></div>
+<script>
+const $=s=>document.querySelector(s),M=$('#m'),R=a=>a[Math.random()*a.length|0],sh=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
+let S;try{S=JSON.parse(localStorage.getItem('sta_c173'))}catch(e){}
+const sv=()=>{try{localStorage.setItem('sta_c173',JSON.stringify(S))}catch(e){}};
+let ac;function snd(f,d=.12){try{ac=ac||new AudioContext();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.value=.05;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
+const good=()=>snd(660),bad=()=>snd(170,.3);
+function hud(){$('#h').textContent=S?`${S.name} | ${{t:'تدريب',p:'تطبيق',c:'تحدٍّ'}[S.mode]} | المستوى ${(1+S.xp/100)|0} | الخبرة ${S.xp} | الأخطاء ${S.err}`:'';$('#pr').style.width=S?(S.st/ST.length*100)+'%':'0';$('#nv').innerHTML=S?ST.map((n,i)=>`<button class="${i==S.st?'on':''}" ${i>S.mx?'disabled':''} onclick="go(${i})">${n}</button>`).join(''):''}
+function go(i){S.st=i;S.mx=Math.max(S.mx,i);sv();hud();FN[i]()}
+const nxt=()=>go(S.st+1);
+let FL=[],MS=[];
+function quiz(L,done,i=0,r=0){if(i>=L.length){done(r);return}
+const [qq,oo,a,w,tp,c,h,s]=L[i],o=sh(oo.map((x,k)=>[x,k]));let f=0;
+M.innerHTML=`<div class=card><small>سؤال ${i+1}/${L.length} <span class=tg>${s||'ASTM'}</span></small><h3>${qq}</h3><div>${o.map((x,j)=>`<button class=op data-j=${j}>${x[0]}</button>`).join('')}</div><div id=f>${S.mode=='t'&&h?`<p class=hint>تلميح: ${h}</p>`:''}</div></div>`;
+const all=()=>M.querySelectorAll('.op');
+all().forEach(b=>b.onclick=()=>{const k=o[b.dataset.j][1],nx=`<button class=pri id=nx>التالي</button>`,bn=()=>{$('#nx').onclick=()=>quiz(L,done,i+1,r)};
+if(k==a){good();b.classList.add('ok');if(!f){r++;S.xp+=S.mode=='t'?6:10}all().forEach(x=>x.disabled=1);$('#f').innerHTML=`<div class="fb g"><b>✓ صحيح.</b> ${w}</div>${nx}`;hud();sv();bn()}
+else{bad();if(!f){f=1;S.err++;MS.push(tp);if(c)FL.push(tp)}b.classList.add('no');b.disabled=1;hud();
+if(S.mode=='t')$('#f').innerHTML=`<div class="fb b"><b>✗ ليست الإجابة.</b> ${w}<br>جرّب إجابة أخرى.</div>`;
+else{all().forEach(x=>{x.disabled=1;if(o[x.dataset.j][1]==a)x.classList.add('ok')});$('#f').innerHTML=`<div class="fb b"><b>✗ الإجابة الصحيحة بالأخضر.</b> ${w}</div>${nx}`;bn()}}})}
+
+function pr(h){$('#pa').innerHTML=h}
+const fm=m=>`<div class="fb b"><b>✗ ${m[0]}</b><br>السبب: ${m[1]}<br>الصحيح: ${m[2]}<br>الأثر: ${m[3]}</div>`;
+function it(h,t,L,b){M.innerHTML=`<div class=card><h2>${h}</h2><p>${t}</p><button class=pri id=b>ابدأ</button></div>`;$('#b').onclick=()=>quiz(L,()=>{S.xp+=b;nxt()})}
+function ord(L,cb,h){let ch=[];const E=sh(L.map((x,i)=>i));function dr(){M.innerHTML=`<div class=card><h3>${h}</h3><ol>${ch.map(i=>`<li>${L[i]}</li>`).join('')}</ol>${E.filter(i=>!ch.includes(i)).map(i=>`<button class=op data-i=${i}>${L[i]}</button>`).join('')}<button id=u>تراجع</button><button class=pri id=k ${ch.length<L.length?'disabled':''}>تحقق</button><div id=f></div></div>`;
+M.querySelectorAll('.op').forEach(b=>b.onclick=()=>{ch.push(+b.dataset.i);dr()});$('#u').onclick=()=>{ch.pop();dr()};$('#k').onclick=()=>cb(ch.filter((x,i)=>x==i).length)}dr()}
+
+
+
+function calc(h,intro,L,bt,bank,cb){const tr=S.mode=='t';
+M.innerHTML=`<div class=card><h2>${h}</h2>${intro}${L.map(x=>`<label>${x[1]}<input id=i_${x[0]} type=number step=any></label>`).join('')}<button class=pri id=ck>تحقق</button><div id=f></div></div>`;
+$('#ck').onclick=()=>{const w=L.filter(x=>{const v=parseFloat($('#i_'+x[0]).value);return isNaN(v)||Math.abs(v-x[2])>x[3]});S.err+=w.length;hud();
+if(w.length){bad();$('#f').innerHTML=w.map(x=>fm(['حساب غير صحيح: '+x[1],'المعادلة: '+x[4],tr?'القيمة الصحيحة ≈ '+x[2].toFixed(2):'أعد الحساب بهذه المعادلة','نتيجة خاطئة'])).join('');return}
+good();S.xp+=50;if(cb)cb();hud();sv();$('#ck').disabled=1;$('#f').innerHTML=`<div class="fb g"><b>✓ كل الحسابات صحيحة.</b></div><button class=pri id=nx>${bt}</button>`;$('#nx').onclick=()=>quiz(bank,()=>{S.xp+=20;nxt()})}}
+
+const ST=['المهمة','المعدات','التنفيذ','الحسابات','المراقب','الامتحان'];
+const FN=[s0,s1,s2,s3,s4,s5];
+function start(){M.innerHTML=`<div class=card><h2>مختبر الموقع: أنت فني الهواء بالطريقة الحجمية</h2><p><b>تصميم اللعبة: أحمد شاكر</b></p><p>تتعلم قياس محتوى الهواء في الخرسانة الطازجة بالطريقة الحجمية وفق <b>ASTM C173/C173M – 26</b> (النسخة المرفقة، وهي ممسوحة ضوئياً فرجعت أرقامها على صور الصفحات). الوسوم: <span class=tg>ASTM</span> متطلب المواصفة، <span class=tg>مشروع</span> متطلب خاص بالمشروع، <span class=tg>ممارسة</span> توضيح مختبري. أرقام المحاكاة توضيحية.</p><label>اسم الفني<input id=nm value="${S?S.name:''}"></label><div><button class=pri onclick="beg('t')">وضع التدريب</button><button onclick="beg('p')">وضع التطبيق</button><button onclick="beg('c')">وضع التحدي</button></div>${S?`<button class=pri onclick="go(S.st)">استكمال من «${ST[S.st]}»</button>`:''}</div>`}
+function beg(m){const n=$('#nm').value.trim();if(!n){alert('اكتب اسمك أولاً');return}S={name:n,mode:m,st:0,mx:0,xp:0,err:0};go(0)}
+// ---- بنوك الأسئلة: [سؤال، خيارات، رقم الصحيح، تفسير، موضوع، حرج، تلميح، مصدر]
+const B0=[['ما ميزة الطريقة الحجمية C173؟',['تصلح لأي نوع ركام: كثيف أو خلوي أو خفيف','للركام الكثيف فقط','للخرسانة غير اللدنة','للأسمنت فقط'],0,'البند 1.1.','مفاهيم',0],
+['ماذا تقيس؟',['الهواء في ملاط الخرسانة دون تأثر بالهواء داخل مسام الركام','الهواء داخل الركام','الهواء في الأسمنت','الماء'],0,'البند 4.1.','مفاهيم',0],
+['متى تكون هي الطريقة الملائمة؟',['للخرسانة ذات الركام الخفيف أو الخبث المبرد بالهواء أو الركام عالي المسامية','للخرسانة الكثيفة فقط','لقياس الهبوط','لقياس الحرارة'],0,'البند 4.1.1.','مفاهيم',0],
+['ما غاية الكحول الأيزوبروبيلي؟',['تفريق الرغوة حتى لا تتجمع في العنق وتفسد القراءة','تبريد الخرسانة','تسخين الماء','تغيير اللون'],0,'البند 4.2.','مفاهيم',0],
+['ما تركيز الكحول المستخدم؟',['70% بالحجم (نحو 65% بالوزن)','10%','100% فقط','30%'],0,'البند 5.10 (تُسمح مفرّقات رغوة أخرى إن أثبتت الاختبارات ألا تغيّر القراءة أكثر من 0.1%).','مفاهيم',0]];
+const B1=[['ما أقل سعة لوعاء القياس؟',['2.0 لتر [0.075 ft³]','6 لترات','14 لتراً','0.5 لتر'],0,'البند 5.1.2.','المعدات',1],
+['ما نسبة قطر الوعاء إلى ارتفاعه في C173؟',['من 1 إلى 1.25 مرة الارتفاع','من 0.75 إلى 1.25','من 2 إلى 3','لا شرط'],0,'البند 5.1.2 (انتبه: في C231 النسبة 0.75–1.25).','المعدات',0],
+['ما سعة القسم العلوي؟',['لا تقل عن 120% من سعة الوعاء','مساوية للوعاء','50%','لا شرط'],0,'البند 5.1.3.','المعدات',0],
+['كيف يُدرَّج عنق القسم العلوي؟',['بزيادات لا تتجاوز 0.5% من 0 إلى 9% أو أكثر، ودقة ±0.1%','5%','1% فقط','دون تدريج'],0,'البند 5.1.3.','المعدات',0],
+['ما سعة الكوب المعاير؟',['1.00% ± 0.04% من حجم وعاء المقياس','5%','10%','لا شرط'],0,'البند 5.5.','المعدات',0],
+['ما أدنى سعة لوعاء قياس الكحول؟',['500 مل [1 pt] وتدريج لا يزيد عن 100 مل','100 مل','5 لترات','لا شرط'],0,'البند 5.6.','المعدات',0],
+['ما كتلة المطرقة؟',['600 ± 200 جم','100 جم','2 كجم','1000 جم فقط'],0,'البند 5.11.','المعدات',0],
+['متى تُعاير الأداة والكوب المعاير؟',['في البداية ثم سنوياً أو عند الاشتباه في تلف','كل شهر','مرة واحدة','لا تُعاير'],0,'البند 6.1.','المعدات',0],
+['ما أقصى خطأ مسموح في تدريج العنق عند فحصه؟',['0.1% هواء','1%','5%','لا حد'],0,'البند 6.3.','المعدات',0]];
+const B2=[['كم طبقة وكم ضربة في C173؟',['طبقتان و25 ضربة لكل طبقة','3 طبقات و25','طبقتان و10','طبقة واحدة'],0,'البند 8.1.3 (انتبه: في C231 للقضيب 3 طبقات).','التنفيذ',1],
+['ما أقصى فائض فوق الحافة بعد نقر الطبقة الأخيرة؟',['3 مم [1/8 in]','25 مم','لا فائض مقبول','10 مم'],0,'البند 8.1.3.','التنفيذ',0],
+['ما أقل كمية ماء تُضاف قبل الكحول؟',['0.5 لتر [1 pt]','50 مل','2 لتر','لا ماء'],0,'البند 8.3.','التنفيذ',0],
+['هل يجوز إضافة كحول لإزالة الرغوة بعد ضبط الصفر؟',['لا يجوز','نعم','مرة واحدة','حسب الفني'],0,'البند 4.2.','التنفيذ',1],
+['ما أقصى مدة يبقى فيها الجهاز مقلوباً في كل مرة؟',['5 ثوانٍ','30 ثانية','دقيقة','لا حد'],0,'البند 8.4.1.','التنفيذ',1],
+['ما أقل زمن للقلب والرج؟',['45 ثانية وحتى يتحرر الخرسانة ويُسمع الركام يتحرك','10 ثوانٍ','5 دقائق','دقيقة'],0,'البند 8.4.1.','التنفيذ',0],
+['ما زاوية ميل الجهاز عند الدحرجة؟',['نحو 45° (0.8 rad) عن الرأسي والوعاء مرتكز على الأرض','90°','0°','10°'],0,'البند 8.4.2.','التنفيذ',0],
+['متى يُعد المستوى مستقراً؟',['إذا لم يتغير أكثر من 0.25% هواء خلال دقيقتين','فوراً','بعد ساعة','لا يُحدَّد'],0,'البند 8.4.2.2.','التنفيذ',0],
+['ما أقصى زمن لاستقرار السائل؟',['6 دقائق وإلا يُلغى الاختبار ويُعاد بكحول أكثر','دقيقة','30 دقيقة','لا حد'],0,'البند 8.4.2.3.','التنفيذ',1],
+['رغوة تعادل أكثر من قسمين على التدريج. ماذا تفعل؟',['يُلغى الاختبار ويُعاد بكمية كحول أكبر','تُهمل','تُطرح من القراءة','تُحسب هواءً'],0,'البندان 4.2 و8.4.2.3.','التنفيذ',1],
+['تسرّب سائل أثناء القلب أو الدحرجة. ماذا تفعل؟',['الاختبار باطل ويُبدأ من جديد','يُكمل','يُضاف سائل','يُهمل'],0,'البند 8.4.2.1.','التنفيذ',0],
+['ماذا تفحص بعد فك الجهاز؟',['عدم وجود خرسانة متماسكة غير مضطربة، وإلا فالاختبار باطل','لون الماء','حرارة الماء','لا شيء'],0,'البند 8.6.','التنفيذ',0],
+['كيف تتحقق من القراءة؟',['قراءة أولية ثم دحرجة دقيقة؛ إن لم تتغير أكثر من 0.25% فهي النهائية','قراءة واحدة','أي قراءة','المتوسط'],0,'البند 8.5.','التنفيذ',0]];
+const B3=[['متى يلزم تصحيح الكحول؟',['عند استخدام أكثر من 1.25 لتر [2.5 pt] من الكحول','دائماً','أبداً','عند أقل من 0.5 لتر'],0,'البند 9.1.','الحسابات',1],
+['كيف تحدد كمية الكحول لاختيار التصحيح؟',['تُقرَّب لأقرب 0.5 لتر [1 pt] ثم يُختار المعامل من جدول 1','بالتقدير','بدون تقريب','تُضاعف'],0,'البند 9.1.','الحسابات',0],
+['ماذا تفعل بمعامل التصحيح؟',['يُطرح من قراءة المقياس النهائية','يُضاف','يُضرب','يُهمل'],0,'حاشية جدول 1.','الحسابات',0],
+['لأي دقة تُبلَّغ نسبة الهواء؟',['أقرب 0.25%','أقرب 0.1%','أقرب 1%','أقرب 0.01%'],0,'البند 9.2.1.','الحسابات',1],
+['ماذا يمثل W في A = A_R − C + W؟',['عدد الأكواب المعايرة من الماء المضافة للمقياس','وزن الماء','عدد الطبقات','الزمن'],0,'البند 9.2.','الحسابات',0],
+['متى تُضاف أكواب الماء المعايرة؟',['حين يتجاوز الهواء مدى 9% من التدريج','دائماً','أبداً','للخرسانة الجافة'],0,'البند 8.4.2.5.','الحسابات',0],
+['عند الغربلة الرطبة لعينة C173، على أي منخل تُغربل؟',['25 مم (1 in.)','37.5 مم','50 مم','لا غربلة'],0,'البند 7.1 (انتبه: في C231 المنخل 37.5 مم).','الحسابات',1],
+['هل يجوز استخدام خرسانة سبق استخدامها في اختبار آخر لملء الوعاء؟',['لا، باستثناء الغربلة الرطبة أو اختبار الحرارة','نعم دائماً','نعم للهبوط','حسب الفني'],0,'البند 7.2.','الحسابات',0]];
+const B4=[['استخدم الفني وعاء 1.5 لتر. الحكم؟',['مخالف: الحد الأدنى 2.0 لتر (5.1.2)','سليم','سليم للخرسانة الجافة','يُقبل بملاحظة'],0,'البند 5.1.2.','المراقبة',1],
+['أضاف الفني كحولاً لإزالة الرغوة بعد ضبط الصفر. الحكم؟',['غير مسموح (4.2): يُعاد الاختبار بكحول أكثر من البداية','سليم','سليم مرة واحدة','يُطرح من القراءة'],0,'البند 4.2.','المراقبة',1],
+['أبقى الفني الجهاز مقلوباً 20 ثانية متواصلة. الحكم؟',['مخالف: لا أكثر من 5 ثوانٍ في كل مرة (8.4.1)','سليم','سليم لتحرير الخرسانة','أفضل'],0,'البند 8.4.1.','المراقبة',1],
+['اكتفى الفني بـ 40 ثانية من القلب والرج. الحكم؟',['مخالف: 45 ثانية على الأقل (8.4.1)','سليم','سليم للخرسانة اللدنة','يُقبل'],0,'البند 8.4.1.','المراقبة',1],
+['استُخدم 2.3 لتر كحول ولم يُصحَّح الناتج. الحكم؟',['مخالف: يلزم التصحيح من جدول 1 (9.1)','سليم','يُضاف للقراءة','يُهمل الكحول'],0,'البند 9.1.','المراقبة',1],
+['تغيرت القراءة 0.5% بعد إعادة الدحرجة. ماذا تفعل؟',['تُسجَّل كقراءة أولية جديدة وتُعاد الدحرجة (8.5.2.1)','تُؤخذ كنهائية','يُؤخذ المتوسط','يُلغى الاختبار فوراً'],0,'البند 8.5.2.1: وإن تكرر التغير فوق 0.25% بعد ذلك يُلغى الاختبار ويُعاد بكحول أكثر (8.5.2.2).','المراقبة',1],
+['استغرق استقرار السائل 8 دقائق. الحكم؟',['يُلغى الاختبار ويُعاد بكحول أكثر (8.4.2.3)','سليم','تُؤخذ القراءة','يُزاد الزمن'],0,'البند 8.4.2.3.','المراقبة',1]];
+const OR=['ترطيب الوعاء وإزالة الماء الراكد','الملء بطبقتين مع 25 ضربة لكل طبقة والنقر 10–15 مرة','التسوية بقضيب التسوية ومسح الحافة','ترطيب القسم العلوي وتركيبه وإدخال القمع','إضافة 0.5 لتر ماء على الأقل ثم الكحول وتسجيل كميته','ملء الماء حتى الصفر وإغلاق الغطاء','قلب ورج الجهاز 45 ثانية على الأقل (5 ثوانٍ لكل قلبة)','دحرجة الجهاز نحو دقيقة بزاوية 45°','ترك المستوى يستقر وقراءته والتحقق بدحرجة ثانية','فك الجهاز وفحص الوعاء ثم حساب الهواء وتصحيح الكحول'];
+// ---- المراحل
+function s0(){it('استلام المهمة','طُلب قياس الهواء في خرسانة ركامها خفيف الوزن، فلا يصلح الضغط (C231). الطريقة الحجمية هي الحل، لكن فيها أخطاء قاتلة: الكحول والرغوة والقلب.',B0,20)}
+function s1(){it('المعدات','وعاء القياس والقسم العلوي والكوب المعاير والمعايرة (البنود 5 و6).',B1,30)}
+function s2(){const FOAM=R([1,3]),tr=S.mode=='t',o=a=>a.map(x=>`<option>${x}</option>`).join(''),sel=(id,l,a)=>`<label>${l}<select id=${id}>${o(a)}</select></label>`;
+M.innerHTML=`<div class=card><h2>تنفيذ الاختبار</h2><p>عند الاستقرار لاحظت رغوة تعادل <b>${FOAM} قسم</b> فوق مستوى السائل. اضبط الإعدادات ثم نفّذ.</p>${tr?`<p class=hint>تلميح: راجع البنود 8.1 إلى 8.5.</p>`:''}<div class=ctl><label>عدد الطبقات<select id=a1>${o([1,2,3])}</select></label><label>عدد الضربات لكل طبقة<input id=a2 type=number value=10></label>${sel('a3','النقر بالمطرقة بعد كل طبقة',['10–15 نقرة','لا نقر','3 نقرات'])}${sel('a4','الوعاء قبل الملء',['مرطّب مع إزالة الماء الراكد','جاف'])}${sel('a5','التسوية',['قضيب التسوية حتى مساواة الحافة ثم مسح الحافة','بالأصابع'])}${sel('a6','إضافة السوائل',['0.5 لتر ماء على الأقل ثم الكحول','الكحول أولاً','100 مل ماء ثم الكحول'])}${sel('a7','مدة بقاء الجهاز مقلوباً في كل مرة',['5 ثوانٍ','15 ثانية','30 ثانية'])}<label>إجمالي زمن القلب والرج: <output id=o8>20</output> ثانية<input id=a8 type=range min=10 max=90 step=5 value=20></label>${sel('a9','ميل الجهاز عند الدحرجة',['نحو 45°','نحو 90°','نحو 10°'])}${sel('a10','زمن الدحرجة',['نحو دقيقة','10 ثوانٍ','5 دقائق'])}${sel('a11','قبل القراءة',['الانتظار حتى لا يتغير المستوى أكثر من 0.25% خلال دقيقتين','القراءة فوراً'])}${sel('a12','التصرف مع الرغوة المذكورة',['متابعة وتسجيل القراءة','إلغاء الاختبار وإعادته بكحول أكثر','إضافة كحول لإزالة الرغوة'])}</div><button class=pri id=go>نفّذ الاختبار</button><div id=f></div></div>`;
+const q=id=>$('#'+id),z=id=>q(id).selectedIndex==0;q('a8').oninput=ev=>q('o8').value=ev.target.value;
+q('go').onclick=()=>{const e=[],ok=(c,m)=>{if(!c)e.push(m)};
+ok(q('a1').selectedIndex==1,['عدد طبقات خاطئ','8.1.3: الوعاء يُملأ بطبقتين متساويتين تقريباً','طبقتان','دمك غير مطابق']);
+ok(+q('a2').value==25,['عدد الضربات','8.1.3: 25 ضربة لكل طبقة','25 ضربة','دمك ناقص أو زائد']);
+ok(z('a3'),['النقر بالمطرقة','8.1.3: النقر 10–15 مرة بعد كل طبقة','10–15 نقرة','فقاعات وفراغات محبوسة']);
+ok(z('a4'),['وعاء غير مرطّب','8.1.1: يُرطَّب الوعاء ويُزال الماء الراكد من القاع','رطّب الوعاء','ماء راكد أو جفاف يغيّر الحجم (توضيحي)']);
+ok(z('a5'),['طريقة التسوية','8.2: قضيب التسوية حتى تُساوي الحافة ثم تُمسح الحافة','سوِّ بقضيب التسوية','حجم عينة غير دقيق']);
+ok(z('a6'),['ترتيب السوائل','8.3: ماء 0.5 لتر على الأقل ثم الكحول المختار','ماء أولاً ثم الكحول','رغوة زائدة ومحتوى كحول غير منضبط']);
+ok(z('a7'),['مدة القلب طويلة','8.4.1: لا يبقى الجهاز مقلوباً أكثر من 5 ثوانٍ في المرة','5 ثوانٍ فقط','الركام يعلق في العنق']);
+ok(+q('a8').value>=45,['زمن القلب والرج قصير','8.4.1: 45 ثانية على الأقل وحتى يتحرر الخرسانة','45 ثانية أو أكثر','الخرسانة لم تتحرر والهواء لم يخرج']);
+ok(z('a9'),['زاوية الدحرجة','8.4.2: نحو 0.8 rad [45°] عن الرأسي','نحو 45°','خلط غير كافٍ']);
+ok(z('a10'),['زمن الدحرجة','8.4.2: نحو دقيقة','نحو دقيقة','خلط غير كافٍ أو مبالغ فيه']);
+ok(z('a11'),['قراءة قبل الاستقرار','8.4.2.2: القراءة بعد استقرار المستوى (≤0.25% خلال دقيقتين)','انتظر الاستقرار','قراءة غير ثابتة']);
+ok(q('a12').selectedIndex==(FOAM>2?1:0),['التصرف مع الرغوة','4.2 و8.4.2.3: رغوة أكثر من قسمين تُلغي الاختبار ويُعاد بكحول أكثر؛ وإضافة كحول بعد الصفر ممنوعة','رغوة ≤ قسمين: تابع، وأكثر منها: ألغِ وأعد','نتيجة خاطئة']);
+S.err+=e.length;hud();
+if(e.length){bad();q('f').innerHTML=e.map(fm).join('')+'<div class="fb b">الاختبار غير مطابق؛ عدّل وأعد.</div>';return}
+good();S.xp+=70;if(S.mode!='t')S.ok1=1;hud();sv();q('go').disabled=1;q('f').innerHTML=`<div class="fb g"><b>✓ تنفيذ مطابق.</b></div><button class=pri id=nx>أسئلة التنفيذ</button>`;q('nx').onclick=()=>quiz(B2,()=>{S.xp+=20;nxt()})}}
+function s3(){const AR=R([5.25,6.5,7.75,8.25,8.75]),V=R([.8,1.3,1.8,2.3]),W=R([0,0,1,2]),rd=Math.round(V*2)/2,C=V>1.25?({1.5:.25,2:.5,2.5:.75}[rd]||0):0,A=AR-C+W;
+calc('الحساب والإبلاغ',`<p>القراءة النهائية للمقياس A_R = <b>${AR.toFixed(2)}%</b>، وكمية الكحول المستخدمة = <b>${V.toFixed(1)} لتر</b>، وعدد الأكواب المعايرة المضافة W = <b>${W}</b> (كل كوب 1.00%).</p><table class=rep style="width:100%"><tr><td>الكحول المقرّب (لتر)</td><td>≤1.0</td><td>1.5</td><td>2.0</td><td>2.5</td></tr><tr><td>التصحيح C (%)</td><td>0.0</td><td>0.25</td><td>0.50</td><td>0.75</td></tr></table><p>التصحيح يُطبَّق فقط عند استخدام أكثر من 1.25 لتر، ويُطرح من القراءة. احسب C ثم نسبة الهواء A.</p>`,[['c','C (%)',C,.01,'قرّب الكحول لأقرب 0.5 لتر ثم اختر C من الجدول (ولا تصحيح إن كان ≤ 1.25 لتر)'],['a','A (% أقرب 0.25)',A,.01,'A = A_R − C + W']],'أسئلة الإبلاغ',B3,()=>{if(S.mode!='t')S.ok2=1})}
+function s4(){it('اختبار المهندس المشرف','سيناريوهات من الموقع: اكتشف الخطأ واتخذ القرار.',B4,30)}
+function s5(){M.innerHTML=`<div class=card><h2>الامتحان الشامل</h2><p>14 سؤالاً ثم ترتيب الخطوات، بلا تلميحات. الشهادة تشترط ≥80% وعدم الإخفاق في بند جوهري، وإنجاز التنفيذ والحساب بنجاح في وضع التطبيق أو التحدي.</p><button class=pri id=b>ابدأ الامتحان</button></div>`;
+$('#b').onclick=()=>{FL=[];MS=[];const m=S.mode;S.mode='p';const Q=sh([].concat(B0,B1,B2,B3,B4)).slice(0,14);quiz(Q,r=>{S.mode=m;ord(OR,c=>{if(c<7){FL.push('ترتيب الخطوات');MS.push('ترتيب الخطوات')}res(r+Math.round(c/OR.length*3),Q.length+3)},'رتّب خطوات الاختبار')})}}
+function res(p,tot){const pc=Math.round(p/tot*100),cr=[...new Set(FL)],ms=[...new Set(MS)],pass=pc>=80&&!cr.length&&S.ok1&&S.ok2,why=[];
+if(pc<80)why.push('الدرجة دون 80%');if(cr.length)why.push('إخفاق في بنود جوهرية: '+cr.join('، '));if(!(S.ok1&&S.ok2))why.push('لم تُنجز التنفيذ والحساب بنجاح في وضع التطبيق أو التحدي');
+if(pass){S.cert=1;S.xp+=100;sv();hud()}
+M.innerHTML=`<div class=card><h2>${pass?'اجتزت الامتحان':'لم تتحقق شروط الإتقان'}</h2><p>الدرجة ${p}/${tot} — نسبة الإتقان ${pc}%</p>${why.length?`<div class="fb b">${why.join('<br>')}</div>`:''}<p><b>نقاط القوة:</b> ${['مفاهيم','المعدات','التنفيذ','الحسابات','المراقبة'].filter(x=>!ms.includes(x)).join('، ')||'—'}</p><p><b>تحتاج تدريباً في:</b> ${ms.join('، ')||'لا شيء'}</p>${pass?`<button class=pri id=ce>عرض الشهادة</button>`:''}<button onclick=go(2)>إعادة التنفيذ</button><button onclick=s5()>إعادة الامتحان</button></div>`;
+if(pass)$('#ce').onclick=()=>{pr(`<div class=rep style="text-align:center"><h1>شهادة إتقان قياس الهواء بالطريقة الحجمية</h1><p>تشهد أكاديمية المختبر بأن</p><h2>${S.name}</h2><p>أتقن الإجراء والحسابات وفق ASTM C173/C173M – 26 بنسبة ${pc}% (تدريب تعليمي، وليست شهادة اعتماد رسمية)</p><p>${new Date().toLocaleDateString('ar')} — الخبرة ${S.xp}</p><p>تصميم اللعبة: أحمد شاكر</p></div>`);document.body.classList.add('pp');print();document.body.classList.remove('pp')}}
+hud();start();
+</script></body></html>
