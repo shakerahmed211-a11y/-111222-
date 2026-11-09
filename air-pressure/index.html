@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>محتوى الهواء بطريقة الضغط — ASTM C231/C231M-26</title>
+<style>
+:root{--bg:#e4e1da;--cd:#f7f5f0;--ink:#1d2630;--st:#2c5470;--am:#c98a1b;--ok:#2f8f5f;--er:#b8433a;--ln:#c9c4b8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 'Noto Kufi Arabic','Segoe UI',Tahoma,sans-serif}
+header{background:var(--st);color:#fff;padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+header h1{font-size:18px;margin:0}#h{font-size:14px}#pb{height:4px;background:#0003}#pr{height:4px;background:var(--am);transition:width .4s}
+nav{display:flex;gap:4px;overflow-x:auto;padding:8px;background:#d6d2c8}nav button{white-space:nowrap;font-size:13px;padding:5px 10px}nav .on{background:var(--st);color:#fff}
+main{max-width:980px;margin:14px auto;padding:0 12px}.card{background:var(--cd);border:1px solid var(--ln);border-radius:6px;padding:18px}
+button{font:inherit;border:1px solid var(--st);background:#fff;color:var(--st);border-radius:4px;padding:8px 14px;cursor:pointer;margin:3px}
+button:disabled{opacity:.45;cursor:default}button.pri{background:var(--st);color:#fff}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--am)}
+.op{display:block;width:100%;text-align:right}.ok{background:#d5eedf!important;border-color:var(--ok)!important;color:#145a37!important}.no{background:#f4d9d5!important;border-color:var(--er)!important;color:#7d2219!important}.sel{background:var(--st);color:#fff}
+.fb{padding:10px 14px;border-radius:4px;margin:10px 0;border-inline-start:5px solid}.g{background:#e3f3ea;border-color:var(--ok)}.b{background:#f8e4e1;border-color:var(--er)}.hint{color:#7a5300}
+.tg{background:var(--am);color:#fff;padding:1px 8px;border-radius:3px;font-size:12px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:700px){.g2{grid-template-columns:1fr}}
+.sv{width:100%;max-height:300px;background:#cfd6db;border-radius:4px}label{display:block;margin:6px 0;font-size:14px}input,select,textarea{font:inherit;width:100%;padding:6px;border:1px solid var(--ln);border-radius:4px}input[type=range]{padding:0}
+.ctl{background:#ecebe5;padding:8px;border-radius:4px;margin-bottom:8px}.nx{box-shadow:0 0 0 3px var(--am)}.eq{display:inline-block;margin:4px;padding:10px 12px}
+.sl path{transform-box:fill-box;transform-origin:50% 100%;animation:sk 1s ease-out}@keyframes sk{from{transform:scaleY(1.5)}}
+#pa{max-width:820px;margin:12px auto}.rep{background:#fff;border:2px solid var(--st);padding:20px}.rep td{border:1px solid var(--ln);padding:6px}.rep table{width:100%;border-collapse:collapse}
+@media(prefers-reduced-motion:reduce){.sl path{animation:none}}@media print{.pp header,.pp nav,.pp #pb,.pp main{display:none}}
+.trk{position:relative;height:22px;background:#d6d2c8;border-radius:4px;overflow:hidden;margin:10px 0}#bar{position:absolute;top:0;right:0;height:100%;width:0;background:#2c5470;opacity:.55}.z{position:absolute;top:0;height:100%;background:#b8433a40}.mk{position:absolute;top:0;width:4px;height:100%;background:#c98a1b}</style></head><body>
+<header><a href="../" style="color:#fff;text-decoration:none">← الرئيسية</a><h1>محتوى الهواء بطريقة الضغط — ASTM C231/C231M – 26 <small style="font-weight:400;font-size:13px;opacity:.85">| تصميم: أحمد شاكر</small></h1><div id="h"></div><button onclick="if(confirm('مسح التقدم والبدء من جديد؟')){localStorage.removeItem('sta_c231');S=null;hud();start()}">إعادة من البداية</button></header><div id="pb"><div id="pr"></div></div><nav id="nv"></nav><main id="m"></main><div id="pa"></div>
+<script>
+const $=s=>document.querySelector(s),M=$('#m'),R=a=>a[Math.random()*a.length|0],sh=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
+let S;try{S=JSON.parse(localStorage.getItem('sta_c231'))}catch(e){}
+const sv=()=>{try{localStorage.setItem('sta_c231',JSON.stringify(S))}catch(e){}};
+let ac;function snd(f,d=.12){try{ac=ac||new AudioContext();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.value=.05;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
+const good=()=>snd(660),bad=()=>snd(170,.3);
+function hud(){$('#h').textContent=S?`${S.name} | ${{t:'تدريب',p:'تطبيق',c:'تحدٍّ'}[S.mode]} | المستوى ${(1+S.xp/100)|0} | الخبرة ${S.xp} | الأخطاء ${S.err}`:'';$('#pr').style.width=S?(S.st/ST.length*100)+'%':'0';$('#nv').innerHTML=S?ST.map((n,i)=>`<button class="${i==S.st?'on':''}" ${i>S.mx?'disabled':''} onclick="go(${i})">${n}</button>`).join(''):''}
+function go(i){S.st=i;S.mx=Math.max(S.mx,i);sv();hud();FN[i]()}
+const nxt=()=>go(S.st+1);
+let FL=[],MS=[];
+function quiz(L,done,i=0,r=0){if(i>=L.length){done(r);return}
+const [qq,oo,a,w,tp,c,h,s]=L[i],o=sh(oo.map((x,k)=>[x,k]));let f=0;
+M.innerHTML=`<div class=card><small>سؤال ${i+1}/${L.length} <span class=tg>${s||'ASTM'}</span></small><h3>${qq}</h3><div>${o.map((x,j)=>`<button class=op data-j=${j}>${x[0]}</button>`).join('')}</div><div id=f>${S.mode=='t'&&h?`<p class=hint>تلميح: ${h}</p>`:''}</div></div>`;
+const all=()=>M.querySelectorAll('.op');
+all().forEach(b=>b.onclick=()=>{const k=o[b.dataset.j][1],nx=`<button class=pri id=nx>التالي</button>`,bn=()=>{$('#nx').onclick=()=>quiz(L,done,i+1,r)};
+if(k==a){good();b.classList.add('ok');if(!f){r++;S.xp+=S.mode=='t'?6:10}all().forEach(x=>x.disabled=1);$('#f').innerHTML=`<div class="fb g"><b>✓ صحيح.</b> ${w}</div>${nx}`;hud();sv();bn()}
+else{bad();if(!f){f=1;S.err++;MS.push(tp);if(c)FL.push(tp)}b.classList.add('no');b.disabled=1;hud();
+if(S.mode=='t')$('#f').innerHTML=`<div class="fb b"><b>✗ ليست الإجابة.</b> ${w}<br>جرّب إجابة أخرى.</div>`;
+else{all().forEach(x=>{x.disabled=1;if(o[x.dataset.j][1]==a)x.classList.add('ok')});$('#f').innerHTML=`<div class="fb b"><b>✗ الإجابة الصحيحة بالأخضر.</b> ${w}</div>${nx}`;bn()}}})}
+
+function pr(h){$('#pa').innerHTML=h}
+const fm=m=>`<div class="fb b"><b>✗ ${m[0]}</b><br>السبب: ${m[1]}<br>الصحيح: ${m[2]}<br>الأثر: ${m[3]}</div>`;
+function it(h,t,L,b){M.innerHTML=`<div class=card><h2>${h}</h2><p>${t}</p><button class=pri id=b>ابدأ</button></div>`;$('#b').onclick=()=>quiz(L,()=>{S.xp+=b;nxt()})}
+function ord(L,cb,h){let ch=[];const E=sh(L.map((x,i)=>i));function dr(){M.innerHTML=`<div class=card><h3>${h}</h3><ol>${ch.map(i=>`<li>${L[i]}</li>`).join('')}</ol>${E.filter(i=>!ch.includes(i)).map(i=>`<button class=op data-i=${i}>${L[i]}</button>`).join('')}<button id=u>تراجع</button><button class=pri id=k ${ch.length<L.length?'disabled':''}>تحقق</button><div id=f></div></div>`;
+M.querySelectorAll('.op').forEach(b=>b.onclick=()=>{ch.push(+b.dataset.i);dr()});$('#u').onclick=()=>{ch.pop();dr()};$('#k').onclick=()=>cb(ch.filter((x,i)=>x==i).length)}dr()}
+
+
+
+const ST=['المهمة','المعايرة','معامل الركام','التنفيذ','الحساب','الامتحان'];
+const FN=[s0,s1,s2,s3,s4,s5];
+function start(){M.innerHTML=`<div class=card><h2>مختبر الموقع: أنت فني قياس الهواء</h2><p><b>تصميم اللعبة: أحمد شاكر</b></p><p>تتعلم قياس محتوى الهواء في الخرسانة الطازجة بطريقة الضغط وفق <b>ASTM C231/C231M – 26</b> (النسخة المرفقة)، بمقياسي Type A وType B. الوسوم: <span class=tg>ASTM</span> متطلب المواصفة، <span class=tg>مشروع</span> متطلب خاص بالمشروع، <span class=tg>ممارسة</span> توضيح مختبري. أرقام المحاكاة توضيحية.</p><label>اسم الفني<input id=nm value="${S?S.name:''}"></label><div><button class=pri onclick="beg('t')">وضع التدريب</button><button onclick="beg('p')">وضع التطبيق</button><button onclick="beg('c')">وضع التحدي</button></div>${S?`<button class=pri onclick="go(S.st)">استكمال من «${ST[S.st]}»</button>`:''}</div>`}
+function beg(m){const n=$('#nm').value.trim();if(!n){alert('اكتب اسمك أولاً');return}S={name:n,mode:m,st:0,mx:0,xp:0,err:0};go(0)}
+function calc(h,intro,L,bt,bank,cb){const tr=S.mode=='t';
+M.innerHTML=`<div class=card><h2>${h}</h2>${intro}${L.map(x=>`<label>${x[1]}<input id=i_${x[0]} type=number step=any></label>`).join('')}<button class=pri id=ck>تحقق</button><div id=f></div></div>`;
+$('#ck').onclick=()=>{const w=L.filter(x=>{const v=parseFloat($('#i_'+x[0]).value);return isNaN(v)||Math.abs(v-x[2])>x[3]});S.err+=w.length;hud();
+if(w.length){bad();$('#f').innerHTML=w.map(x=>fm(['حساب غير صحيح: '+x[1],'المعادلة: '+x[4],tr?'القيمة الصحيحة ≈ '+x[2].toFixed(2):'أعد الحساب بهذه المعادلة','نتيجة خاطئة'])).join('');return}
+good();S.xp+=50;if(cb)cb();hud();sv();$('#ck').disabled=1;$('#f').innerHTML=`<div class="fb g"><b>✓ كل الحسابات صحيحة.</b></div><button class=pri id=nx>${bt}</button>`;$('#nx').onclick=()=>quiz(bank,()=>{S.xp+=20;nxt()})}}
+// ---- بنوك الأسئلة: [سؤال، خيارات، رقم الصحيح، تفسير، موضوع، حرج، تلميح، مصدر]
+const B0=[['ما المبدأ الذي يقوم عليه الاختبار؟',['قانون بويل: تغيّر حجم الهواء مع تغيّر الضغط','قانون أوم','التسخين','التبخير'],0,'البندان 1.1 و4.1.','مفاهيم',0],
+['هل يقيس الاختبار الهواء داخل مسام الركام؟',['لا: يستبعده، ولذلك يناسب الركام الكثيف','نعم','في الركام الخفيف فقط','في الأسمنت فقط'],0,'البند 3.1.','مفاهيم',0],
+['ما الطريقة البديلة للخرسانة ذات الركام الخفيف أو عالي المسامية؟',['الطريقة الحجمية C173','C231 نفسها','C143','C1064'],0,'البند 1.2.','مفاهيم',1],
+['هل يصلح الاختبار لخرسانة غير لدنة كخرسانة الأنابيب؟',['لا ينطبق','نعم','في الصيف فقط','للأسمنت فقط'],0,'البند 1.2.','مفاهيم',0],
+['ما نوعا المقياس في المواصفة؟',['Type A (عمود ماء) وType B (غرفة هواء ومؤشر ضغط)','Type 1 وType 2','رقمي وتناظري فقط','لا تصنيف'],0,'البند 4.1.','مفاهيم',0]];
+const B1=[['ما الحد الأدنى لسعة وعاء المقياس؟',['6.0 لتر [0.20 ft³]','2 لتر','14 لتراً','28 لتراً'],0,'البند 4.2.','المعايرة',1],
+['ما نسبة قطر الوعاء إلى ارتفاعه؟',['من 0.75 إلى 1.25 مرة الارتفاع','من 2 إلى 3','0.25','لا شرط'],0,'البند 4.2.','المعايرة',0],
+['ما أقصى معامل تمدد D مسموح للجهاز؟',['0.1% من محتوى الهواء على التدريج','1%','5%','لا حد'],0,'البند 4.2.','المعايرة',0],
+['كل كم تُجرى معايرة الجهاز على الأكثر؟',['على فترات لا تتجاوز 3 أشهر','كل سنة','كل 5 سنوات','عند الشراء فقط'],0,'البند 5.1.','المعايرة',1],
+['متى تلزم إعادة معايرة Type A؟',['عند تغيّر الارتفاع بأكثر من 180 م [600 ft] عن مكان آخر معايرة','عند تغيير الفني','عند تغيير الخرسانة','لا تلزم'],0,'البند 5.1.','المعايرة',0],
+['ما أثر الضغط الجوي على المعايرة؟',['يؤثر على Type A ولا يؤثر على Type B','يؤثر على Type B فقط','يؤثر عليهما','لا يؤثر'],0,'البند 5.1.','المعايرة',0],
+['ما المدى الأدنى لتدريج قراءة الهواء؟',['8% على الأقل مقروءة لأقرب 0.1%','2%','20%','لا شرط'],0,'البند 4.3.2.','المعايرة',0],
+['ماذا تتضمن سجلات المعايرة؟',['معامل التمدد وحجم وعاء المعايرة وقراءة المقياس عند نقطة المعايرة','اسم الشاحنة','الهبوط','الحرارة'],0,'البند 5.2.','المعايرة',0],
+['ما كتلة المطرقة لوعاء أكبر من 14 لتراً؟',['1.0 كجم ± 0.25','0.6 كجم ± 0.25','5 كجم','100 جم'],0,'البند 4.10.','المعايرة',0]];
+const B2=[['ما الغاية من معامل تصحيح الركام G؟',['طرح الهواء الظاهري للركام نفسه من القراءة','تصحيح الهبوط','تصحيح الحرارة','تصحيح الوزن'],0,'البندان 6.1 و9.1.','معامل الركام',0],
+['كيف يُحدَّد G؟',['بالاختبار على ركام ناعم وخشن مغمور بالنسب والرطوبة نفسها في الخلطة','بالحساب من الامتصاص فقط','من جدول','يُفترض صفراً'],0,'البند 6.1 (ملاحظة 6: لا يُحدَّد إلا بالاختبار).','معامل الركام',0],
+['كيف يوضع الركام في الوعاء؟',['كميات صغيرة تباعاً في وعاء ثلثه ماء، مع إزالة الرغوة والنقر والدمك الخفيف للجزء العلوي 25 مم (8–12 مرة) والتقليب','دفعة واحدة جافاً','بدون ماء','في وعاء ممتلئ ماء فقط'],0,'البند 6.3.','معامل الركام',0],
+['كم يبقى الركام مغموراً قبل تحديد G؟',['زمناً يقارب الفترة بين إدخال الماء للخلاطة ووقت الاختبار','ثوانٍ','ساعة ثابتة','لا يهم'],0,'البند 6.4.1.','معامل الركام',0],
+['كيف يُحسب G لمقياس Type A؟',['G = h1 − h2','G = h1 + h2','G = h1 × h2','G = h2 − h1'],0,'البند 6.4.2.','معامل الركام',0],
+['كيف يُحصل على G لمقياس Type B؟',['قراءة المقياس ناقص الماء المسحوب كنسبة من حجم الوعاء','قراءة المقياس فقط','الماء المسحوب فقط','صفر'],0,'البند 6.4.3.','معامل الركام',0]];
+const B3=[['هبوط 110 مم: ما طريقة الدمك؟',['القضيب','الاهتزاز فقط','أي منهما','لا دمك'],0,'البند 8.1.3.','التنفيذ',1],
+['هبوط 15 مم: ما طريقة الدمك؟',['الاهتزاز','القضيب','أي منهما','لا دمك'],0,'البند 8.1.3.','التنفيذ',1],
+['ما عدد طبقات القضيب وضرباتها؟',['3 طبقات و25 ضربة لكل طبقة','طبقتان و25','3 طبقات و10','4 طبقات و50'],0,'البند 8.1.4.','التنفيذ',1],
+['ما عدد الطبقات والإدخالات عند الاهتزاز؟',['طبقتان وثلاث إدخالات لكل طبقة','3 طبقات وإدخال واحد','طبقة واحدة','5 إدخالات'],0,'البند 8.1.5.','التنفيذ',0],
+['ماذا تفعل بعد دمك كل طبقة بالقضيب؟',['النقر على جوانب الوعاء بالمطرقة 10–15 مرة','لا شيء','نقر 3 مرات','هز الوعاء'],0,'البند 8.1.4.','التنفيذ',0],
+['كم يُزال عادةً أثناء التسوية؟',['نحو 3 مم','50 مم','لا شيء','10 مم'],0,'البند 8.1.6.','التنفيذ',0],
+['لماذا تُنظَّف حواف الوعاء والغطاء؟',['لإحكام يتحمل الضغط','للمظهر','لتقليل الوزن','لا سبب'],0,'البند 8.2.1.','التنفيذ',0],
+['Type A: بكم يُزاد الضغط فوق ضغط الاختبار قبل ضبطه؟',['نحو 1.4 kPa [0.2 psi] ثم يُقرأ h1 عند P بالضبط بعد النقر','10 kPa','لا زيادة','100 kPa'],0,'البند 8.2.3.','التنفيذ',0],
+['Type A: كم يُنقر الوعاء بعد تفريغ الضغط قبل قراءة h2؟',['نحو دقيقة','10 ثوانٍ','5 دقائق','لا نقر'],0,'البند 8.2.3.','التنفيذ',0],
+['Type A: كيف يُتحقق من القراءة؟',['اختباران متتاليان متفقان ضمن 0.2% هواء ويُؤخذ المتوسط','بلا شرط','يُؤخذ الأكبر','يُؤخذ الأصغر'],0,'البند 8.2.4.','التنفيذ',1],
+['Type B: لماذا يُغلق صمام الهواء الرئيسي قبل تفريغ الضغط؟',['وإلا يُسحب الماء إلى غرفة الهواء فيفسد القياس','للتوفير','للصوت','لا سبب'],0,'البند 8.3.2.','التنفيذ',0],
+['Type B: ماذا تفعل قبل ضبط المؤشر على خط الضغط الابتدائي؟',['تنتظر ثوانٍ لتبرد الهواء المضغوط','تضبطه فوراً','تنتظر دقيقتين','لا انتظار'],0,'البند 8.3.2.','التنفيذ',0]];
+const B4=[['لأي دقة تُبلَّغ نسبة الهواء؟',['أقرب 0.1% بعد طرح G','أقرب 1%','أقرب 0.01%','أقرب 5%'],0,'البند 10.1.1.','الحساب',0],
+['قراءة المؤشر الدائري تجاوزت 8%: كيف تُبلَّغ؟',['تُقرَّب القراءة المصحّحة لأقرب نصف قسم من التدريج','لأقرب 0.1','لأقرب 1','لا تُبلَّغ'],0,'البند 10.1.1.','الحساب',0],
+['ماذا يُبلَّغ إضافةً لنسبة الهواء؟',['تاريخ ووقت الاختبار','اسم السائق','الهبوط فقط','حرارة الجو'],0,'البند 10.1.2.','الحساب',0],
+['متى تُحسب الخلطة الكاملة At بالمعادلة (6)؟',['حين تكون العينة مغربلة رطباً على منخل 37.5 مم','دائماً','أبداً','للخرسانة الخفيفة'],0,'البند 9.2.','الحساب',0],
+['اختباران متتاليان على Type A كان فرقهما 0.5% هواء. الحكم؟',['غير متفقين (الحد 0.2%) فيُعاد','مقبول','يُؤخذ المتوسط','يُؤخذ الأول'],0,'البند 8.2.4.','المراقبة',1],
+['ركام الخرسانة خفيف الوزن. أي طريقة تُستخدم؟',['C173 الحجمية وليس C231','C231','C143','C138'],0,'البند 1.2.','المراقبة',1],
+['أهمل الفني تنظيف الحواف وفرّغ الضغط في Type B دون إغلاق الصمام. الأثر؟',['تسرب أو دخول ماء لغرفة الهواء وقراءات خاطئة','لا أثر','تحسن الدقة','تقصير الزمن'],0,'البندان 8.2.1 و8.3.2.','المراقبة',1],
+['أقصى فرق مقبول بين مشغّلين على Type A (هواء حتى 7%)؟',['0.8% هواء','0.1%','3%','لا حد'],0,'البند 11.1.3 (d2s).','المراقبة',0]];
+const OR=['ترطيب الوعاء ووضعه على سطح مستوٍ صلب','ملء الوعاء ودمكه بالقضيب على طبقات','النقر بالمطرقة 10–15 مرة بعد كل طبقة','التسوية بقضيب التسوية بحركة نشر حتى يمتلئ الوعاء تماماً','تنظيف الحواف وتركيب الغطاء وملء الماء وإخراج الهواء','تطبيق الضغط وقراءة المقياس مع النقر','تفريغ الضغط والقراءة أو إغلاق الصمام حسب النوع','إجراء اختبار ثانٍ للتحقق (Type A)','طرح معامل الركام G من القراءة','الإبلاغ لأقرب 0.1% مع التاريخ والوقت'];
+// ---- المراحل
+function s0(){it('استلام المهمة','طُلب قياس الهواء المحبوس في خرسانة مقاومة للصقيع. قراءة خاطئة قد تقبل خرسانة غير مطابقة أو ترفض سليمة.',B0,20)}
+function s1(){const A=Math.random()<.5,W=R([7.00,7.02,6.98]),w=R([.35,.42,.49]),D=R([.05,.08,.10]),r=(A?.98:1)*w/W*100,K=A?r+D:r;
+calc('المعايرة',`<p>مقياس <b>Type ${A?'A':'B'}</b>. ماء يملأ وعاء القياس W = <b>${W.toFixed(2)} كجم</b>، وماء يملأ وعاء المعايرة w = <b>${w.toFixed(2)} كجم</b>.${A?` معامل التمدد D = <b>${D.toFixed(2)}%</b>.`:''} احسب الحجم الفعّال لوعاء المعايرة R (% من حجم الوعاء) ثم قراءة المعايرة K.</p>`,[['r','R (%)',r,.1,A?'R = 0.98 × w ÷ W × 100 (Type A)':'R = w ÷ W × 100 (Type B)'],['k','K (%)',K,.1,A?'K = R + D (Type A)':'K = R (Type B)']],'أسئلة المعدات والمعايرة',B1)}
+function s2(){const B=R([.5,1]),Fb=R([760,800])*B,Cb=R([1050,1000])*B,Fs=.007/B*Fb,Cs=.007/B*Cb,h1=R([1.2,1.4,1.6]),h2=R([.5,.6,.7,.8]);
+calc('معامل تصحيح الركام',`<p>وعاء المقياس S = 0.007 م³، وحجم الخلطة B = <b>${B} م³</b>، كتلة الركام الناعم في الخلطة Fb = <b>${Fb} كجم</b> والخشن Cb = <b>${Cb} كجم</b>. احسب كتلتي الركام للوعاء، ثم G من قراءتي Type A: h1 = <b>${h1.toFixed(1)}%</b> و h2 = <b>${h2.toFixed(1)}%</b>.</p>`,[['fs','Fs (كجم)',Fs,.02,'Fs = (S ÷ B) × Fb'],['cs','Cs (كجم)',Cs,.02,'Cs = (S ÷ B) × Cb'],['g','G (%)',h1-h2,.05,'G = h1 − h2']],'أسئلة معامل الركام',B2)}
+function s3(){const TA=Math.random()<.5,SL=R([15,50,110]),tr=S.mode=='t',o=a=>a.map(x=>`<option>${x}</option>`).join(''),sel=(id,l,a)=>`<label>${l}<select id=${id}>${o(a)}</select></label>`;
+M.innerHTML=`<div class=card><h2>تنفيذ اختبار الهواء</h2><p>المقياس: <b>Type ${TA?'A':'B'}</b> | هبوط الخرسانة: <b>${SL} مم</b>. اضبط الإعدادات ثم نفّذ.</p>${tr?`<p class=hint>تلميح: راجع البند 8.1 والبند ${TA?'8.2':'8.3'}.</p>`:''}<div class=ctl>${sel('a1','طريقة الدمك',['الدمك بالقضيب','الاهتزاز الداخلي'])}<label>عدد الطبقات<select id=a2>${o([2,3,4])}</select></label><label>عدد الضربات (قضيب) أو إدخالات المهتز لكل طبقة<input id=a3 type=number value=10></label>${sel('a4','النقر بالمطرقة بعد كل طبقة (للقضيب)',['10–15 نقرة','لا نقر','3 نقرات'])}${sel('a5','الوعاء قبل الملء',['مرطّب','جاف'])}${sel('a6','التسوية',['قضيب التسوية بحركة نشر حتى يمتلئ الوعاء تماماً','بالأصابع','بالمالج فقط'])}${sel('a7','حواف الوعاء والغطاء',['تنظيفها جيداً قبل التثبيت','تركها دون تنظيف'])}${TA?sel('b1','إزالة فقاعات الهواء المحبوسة',['إمالة نحو 30° ودوران مع النقر الخفيف على الغطاء','بدون إمالة'])+sel('b2','قراءة h1',['عند ضغط الاختبار P بالضبط بعد النقر على الوعاء','عند أي ضغط'])+sel('b3','قراءة h2',['إطلاق الضغط تدريجياً والنقر الخفيف نحو دقيقة ثم القراءة','إطلاق فوري ثم القراءة'])+sel('b4','التحقق',['اختبار ثانٍ ويُؤخذ المتوسط إذا اتفقا ضمن 0.2%','قراءة واحدة']):sel('c1','ملء الماء',['من صنبور حتى يخرج من الآخر مع الهز لإخراج الهواء','دون التأكد من خروج الهواء'])+sel('c2','الضغط الابتدائي',['الانتظار ثوانٍ لتبريد الهواء ثم الضبط','الضبط فوراً'])+sel('c3','تفريغ الضغط',['إغلاق صمام الهواء الرئيسي قبل التفريغ','التفريغ دون إغلاقه'])+sel('c4','قبل القراءة',['النقر على الوعاء بالمطرقة ثم على المؤشر برفق','القراءة دون نقر'])}</div><button class=pri id=go>نفّذ الاختبار</button><div id=f></div></div>`;
+const q=id=>$('#'+id),z=id=>q(id).selectedIndex==0;
+q('go').onclick=()=>{const vib=q('a1').selectedIndex==1,ly=[2,3,4][q('a2').selectedIndex],n=+q('a3').value,e=[],ok=(c,m)=>{if(!c)e.push(m)};
+ok(vib?SL<=75:SL>=25,['طريقة دمك لا تناسب الهبوط','8.1.3: القضيب إذا >75 مم، والاهتزاز إذا <25 مم، وأيهما بين 25 و75','القضيب لهبوط أكبر من 75 والاهتزاز لأقل من 25','دمك غير مطابق']);
+ok(ly==(vib?2:3),['عدد طبقات خاطئ','8.1.4: ثلاث طبقات للقضيب، و8.1.5: طبقتان للاهتزاز','3 للقضيب و2 للاهتزاز','دمك غير مطابق']);
+ok(n==(vib?3:25),['عدد الضربات أو الإدخالات','8.1.4: 25 ضربة لكل طبقة، و8.1.5: ثلاث إدخالات','25 ضربة أو 3 إدخالات','دمك ناقص أو زائد']);
+if(!vib)ok(z('a4'),['النقر بالمطرقة','8.1.4: النقر 10–15 مرة بعد كل طبقة','10–15 نقرة','فقاعات وفراغات محبوسة']);
+ok(z('a5'),['وعاء غير مرطّب','8.1.1: يُرطَّب داخل الوعاء','رطّب الوعاء','وعاء جاف قد يمتص ماء الخرسانة (توضيحي)']);
+ok(z('a6'),['طريقة التسوية','8.1.6: بقضيب التسوية بحركة نشر حتى يمتلئ الوعاء تماماً','قضيب التسوية بالنشر','حجم عينة غير دقيق']);
+ok(z('a7'),['حواف غير نظيفة','8.2.1 و8.3.1: تنظيف الحواف ليحكم الغطاء عند الضغط','نظّف الحواف جيداً','تسرب ضغط وقراءة خاطئة']);
+if(TA){ok(z('b1'),['فقاعات هواء محبوسة','8.2.1: إمالة نحو 30° ودوران مع النقر الخفيف','أمِل ودوّر مع النقر','هواء محبوس يرفع القراءة']);ok(z('b2'),['قراءة h1 عند ضغط غير مضبوط','8.2.3: القراءة عند ضغط الاختبار P بالضبط بعد النقر','اقرأ عند P بالضبط','قراءة غير صحيحة']);ok(z('b3'),['قراءة h2 مبكرة','8.2.3: إطلاق الضغط تدريجياً والنقر الخفيف نحو دقيقة','أطلق تدريجياً وانقر نحو دقيقة','h2 غير مستقرة']);ok(z('b4'),['لا تحقق','8.2.4: اختباران متتاليان ضمن 0.2% ويؤخذ المتوسط','أعد القياس وتحقق من التوافق','نتيجة غير موثوقة'])}
+else{ok(z('c1'),['هواء محبوس في الماء','8.3.1: الملء حتى يخرج الماء من الصنبور الآخر مع الهز','املأ وهزّ حتى يخرج الهواء','قراءة هواء خاطئة']);ok(z('c2'),['ضبط الضغط الابتدائي مبكراً','8.3.2: انتظار ثوانٍ لتبريد الهواء المضغوط','انتظر ثم اضبط','قراءة غير مستقرة']);ok(z('c3'),['تفريغ الضغط دون إغلاق الصمام','8.3.2: عدم إغلاق الصمام الرئيسي يسحب الماء إلى غرفة الهواء','أغلق الصمام الرئيسي قبل التفريغ','دخول ماء وأخطاء لاحقة']);ok(z('c4'),['قراءة دون نقر','8.3.2: النقر على الوعاء بالمطرقة ثم على المؤشر لتثبيته','انقر ثم اقرأ','قيود محلية تُخفض القراءة'])}
+S.err+=e.length;hud();
+if(e.length){bad();q('f').innerHTML=e.map(fm).join('')+'<div class="fb b">الاختبار غير مطابق؛ عدّل وأعد.</div>';return}
+good();S.xp+=70;if(S.mode!='t')S.ok1=1;hud();sv();q('go').disabled=1;q('f').innerHTML=`<div class="fb g"><b>✓ تنفيذ مطابق.</b></div><button class=pri id=nx>أسئلة التنفيذ</button>`;q('nx').onclick=()=>quiz(B3,()=>{S.xp+=20;nxt()})}}
+function s4(){const A1=R([6.2,6.6,7.0,7.4]),G=R([.6,.8,1.0]),As=A1-G,Va=R([.2,.22,.25]),Vt=.95,Vc=Vt-Va,At=100*As*Vc/(100*Vt-As*Va);
+calc('الحساب والإبلاغ',`<p>القراءة الظاهرية A1 = <b>${A1.toFixed(1)}%</b> ومعامل الركام G = <b>${G.toFixed(1)}%</b>. العينة مغربلة رطباً على 37.5 مم، وحجوم الخلطة المطلقة (م³): Vc = <b>${Vc.toFixed(2)}</b> وVa = <b>${Va.toFixed(2)}</b> وVt = <b>${Vt.toFixed(2)}</b>. احسب As ثم At (الخلطة الكاملة).</p>`,[['as','As (% أقرب 0.1)',As,.05,'As = A1 − G'],['at','At (% أقرب 0.1)',At,.1,'At = 100 × As × Vc ÷ (100 × Vt − As × Va)']],'أسئلة الإبلاغ والمراقبة',B4,()=>{if(S.mode!='t')S.ok2=1})}
+function s5(){M.innerHTML=`<div class=card><h2>الامتحان الشامل</h2><p>14 سؤالاً ثم ترتيب الخطوات، بلا تلميحات. الشهادة تشترط ≥80% وعدم الإخفاق في بند جوهري، وإنجاز التنفيذ والحساب بنجاح في وضع التطبيق أو التحدي.</p><button class=pri id=b>ابدأ الامتحان</button></div>`;
+$('#b').onclick=()=>{FL=[];MS=[];const m=S.mode;S.mode='p';const Q=sh([].concat(B0,B1,B2,B3,B4)).slice(0,14);quiz(Q,r=>{S.mode=m;ord(OR,c=>{if(c<7){FL.push('ترتيب الخطوات');MS.push('ترتيب الخطوات')}res(r+Math.round(c/OR.length*3),Q.length+3)},'رتّب خطوات الاختبار')})}}
+function res(p,tot){const pc=Math.round(p/tot*100),cr=[...new Set(FL)],ms=[...new Set(MS)],pass=pc>=80&&!cr.length&&S.ok1&&S.ok2,why=[];
+if(pc<80)why.push('الدرجة دون 80%');if(cr.length)why.push('إخفاق في بنود جوهرية: '+cr.join('، '));if(!(S.ok1&&S.ok2))why.push('لم تُنجز التنفيذ والحساب بنجاح في وضع التطبيق أو التحدي');
+if(pass){S.cert=1;S.xp+=100;sv();hud()}
+M.innerHTML=`<div class=card><h2>${pass?'اجتزت الامتحان':'لم تتحقق شروط الإتقان'}</h2><p>الدرجة ${p}/${tot} — نسبة الإتقان ${pc}%</p>${why.length?`<div class="fb b">${why.join('<br>')}</div>`:''}<p><b>نقاط القوة:</b> ${['مفاهيم','المعايرة','معامل الركام','التنفيذ','الحساب','المراقبة'].filter(x=>!ms.includes(x)).join('، ')||'—'}</p><p><b>تحتاج تدريباً في:</b> ${ms.join('، ')||'لا شيء'}</p>${pass?`<button class=pri id=ce>عرض الشهادة</button>`:''}<button onclick=go(3)>إعادة التنفيذ</button><button onclick=s5()>إعادة الامتحان</button></div>`;
+if(pass)$('#ce').onclick=()=>{pr(`<div class=rep style="text-align:center"><h1>شهادة إتقان قياس الهواء بطريقة الضغط</h1><p>تشهد أكاديمية المختبر بأن</p><h2>${S.name}</h2><p>أتقن الإجراء والحسابات وفق ASTM C231/C231M – 26 بنسبة ${pc}% (تدريب تعليمي، وليست شهادة اعتماد رسمية)</p><p>${new Date().toLocaleDateString('ar')} — الخبرة ${S.xp}</p><p>تصميم اللعبة: أحمد شاكر</p></div>`);document.body.classList.add('pp');print();document.body.classList.remove('pp')}}
+hud();start();
+</script></body></html>
