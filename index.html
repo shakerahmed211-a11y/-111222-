@@ -46,10 +46,10 @@ const T=[
 {sec:'concrete',t:'الوزن الحجمي والمردود والهواء',s:'ASTM C138/C138M – 24a (AASHTO T 121)',d:'وزن الوعاء والدمك والتسوية ثم حساب المردود والهواء.',u:'density/',k:'sta_c138'},
 {sec:'concrete',t:'محتوى الهواء بطريقة الضغط',s:'ASTM C231/C231M – 26',d:'مقياس الهواء من النوع A وB، ومعامل تصحيح الركام والمعايرة.',u:'air-pressure/',k:'sta_c231'},
 {sec:'concrete',t:'محتوى الهواء بالطريقة الحجمية',s:'ASTM C173/C173M – 26',d:'ملء طبقتين، الكحول، التقليب والدحرجة وقراءة المقياس.',u:'air-volumetric/',k:'sta_c173'},
-{sec:'concrete',t:'صب العينات ومعالجتها في الموقع',s:'ASTM C31/C31M – 26a',d:'اختيار القالب والدمك والمعالجة والنقل إلى المعمل.'},
+{sec:'concrete',t:'صب العينات ومعالجتها في الموقع',s:'ASTM C31/C31M – 26a',d:'اختيار القالب والدمك والمعالجة والنقل إلى المعمل.',u:'specimens/',k:'sta_c31'},
 {sec:'concrete',t:'يوم الموقع: حملة متكاملة',s:'عدة مواصفات',d:'شاحنة خرسانة تصل: عينة ثم هبوط ثم حرارة ثم هواء ثم وزن ثم صب العينات.'}];
 let sec='all',P={};
-['sta','sta_c172','sta_c1064','sta_c138','sta_c231','sta_c173'].forEach(k=>{try{const r=JSON.parse(localStorage.getItem(k));if(r)P[k]=r}catch(e){}});
+['sta','sta_c172','sta_c1064','sta_c138','sta_c231','sta_c173','sta_c31'].forEach(k=>{try{const r=JSON.parse(localStorage.getItem(k));if(r)P[k]=r}catch(e){}});
 const $=s=>document.querySelector(s);
 $('#ch').innerHTML=SEC.map(x=>`<button data-s="${x[0]}" aria-pressed="${x[0]=='all'}">${x[1]}</button>`).join('');
 $('#nA').textContent=T.filter(x=>x.u).length;$('#nS').textContent=T.filter(x=>!x.u).length;
